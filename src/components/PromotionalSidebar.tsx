@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 
 const PromotionalSidebar = () => {
   return (
-    <aside className="w-80 space-y-4">
+    <aside className="w-full xl:w-80 space-y-4">
       {/* Welcome Card */}
       <Card className="border-border bg-gradient-to-br from-accent to-accent/80 overflow-hidden">
         <CardContent className="p-6">

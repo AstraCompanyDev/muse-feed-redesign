@@ -81,14 +81,16 @@ To all founders grinding: keep going! The journey is tough but worth it.
       <Header />
       
       <div className="container mx-auto px-4 py-6">
-        <div className="flex gap-6 justify-center">
-          <ProfileSidebar />
+        <div className="flex flex-col lg:flex-row gap-6 justify-center">
+          <div className="hidden lg:block">
+            <ProfileSidebar />
+          </div>
           
-          <main className="flex-1 max-w-2xl space-y-4">
+          <main className="flex-1 w-full lg:max-w-2xl space-y-4">
             <div className="flex justify-end mb-4">
               <Button variant="outline" size="sm" className="gap-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground">
                 <RefreshCw className="h-4 w-4" />
-                Refresh
+                <span className="hidden sm:inline">Refresh</span>
               </Button>
             </div>
 
@@ -99,7 +101,9 @@ To all founders grinding: keep going! The journey is tough but worth it.
             ))}
           </main>
 
-          <PromotionalSidebar />
+          <div className="hidden xl:block">
+            <PromotionalSidebar />
+          </div>
         </div>
       </div>
     </div>
