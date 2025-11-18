@@ -5,7 +5,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const ProfileSidebar = () => {
   return (
-    <aside className="w-80 space-y-4">
+    <aside className="w-full lg:w-80 space-y-4">
       {/* Profile Card */}
       <Card className="border-border bg-card overflow-hidden">
         <div className="h-20 bg-gradient-to-br from-primary/20 to-secondary" />
