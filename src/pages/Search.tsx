@@ -95,90 +95,116 @@ const Search = () => {
               </Button>
             </div>
 
-            <div className="flex flex-wrap gap-3">
-              {filters.map((filter) => (
-                <Button
-                  key={filter}
-                  variant={activeFilter === filter ? "default" : "outline"}
-                  onClick={() => setActiveFilter(filter)}
-                  className={
-                    activeFilter === filter
-                      ? "bg-primary text-primary-foreground hover:bg-primary/90"
-                      : "border-border text-foreground hover:bg-card-highlight"
-                  }
-                >
-                  {filter}
-                </Button>
-              ))}
-            </div>
-
-            {activeFilter === "Roles" && (
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {roles.map((role) => {
-                  const IconComponent = role.Icon;
-                  const isSelected = selectedRole === role.name;
-                  return (
+            <div className="bg-card border border-border rounded-lg p-6 space-y-6">
+              <div className="flex items-center justify-between flex-wrap gap-4">
+                <h2 className="text-lg font-semibold text-foreground">Filter by</h2>
+                <div className="flex gap-2 bg-muted/50 p-1 rounded-lg">
+                  {filters.map((filter) => (
                     <button
-                      key={role.name}
-                      onClick={() => setSelectedRole(isSelected ? null : role.name)}
-                      className={`flex flex-col items-center justify-center p-8 rounded-lg border transition-all ${
-                        isSelected
-                          ? "border-primary bg-primary/10"
-                          : "border-border bg-card hover:bg-card-highlight hover:border-primary/40"
+                      key={filter}
+                      onClick={() => setActiveFilter(filter)}
+                      className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${
+                        activeFilter === filter
+                          ? "bg-primary text-primary-foreground shadow-sm"
+                          : "text-muted-foreground hover:text-foreground"
                       }`}
                     >
-                      <IconComponent className={`h-12 w-12 mb-3 ${isSelected ? "text-primary" : "text-muted-foreground"}`} />
-                      <span className={`font-medium ${isSelected ? "text-primary" : "text-foreground"}`}>{role.name}</span>
+                      {filter}
                     </button>
-                  );
-                })}
+                  ))}
+                </div>
               </div>
-            )}
 
-            {activeFilter === "Location" && (
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                {locations.map((location) => (
-                  <Button
-                    key={location}
-                    variant="outline"
-                    className="border-border text-foreground hover:bg-card-highlight hover:border-primary/40 justify-start"
-                  >
-                    <MapPin className="h-4 w-4 mr-2 text-primary" />
-                    {location}
-                  </Button>
-                ))}
-              </div>
-            )}
+              <div className="min-h-[200px] animate-fade-in">
+                {activeFilter === "Roles" && (
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    {roles.map((role) => {
+                      const IconComponent = role.Icon;
+                      const isSelected = selectedRole === role.name;
+                      return (
+                        <button
+                          key={role.name}
+                          onClick={() => setSelectedRole(isSelected ? null : role.name)}
+                          className={`group flex flex-col items-center justify-center p-8 rounded-lg border-2 transition-all hover:shadow-md ${
+                            isSelected
+                              ? "border-primary bg-primary/5 shadow-sm"
+                              : "border-border bg-background hover:bg-card-highlight hover:border-primary/40"
+                          }`}
+                        >
+                          <div className={`mb-4 p-4 rounded-full transition-colors ${
+                            isSelected ? "bg-primary/10" : "bg-muted group-hover:bg-primary/5"
+                          }`}>
+                            <IconComponent className={`h-8 w-8 transition-colors ${
+                              isSelected ? "text-primary" : "text-muted-foreground group-hover:text-primary"
+                            }`} />
+                          </div>
+                          <span className={`font-semibold ${isSelected ? "text-primary" : "text-foreground"}`}>
+                            {role.name}
+                          </span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                )}
 
-            {activeFilter === "Startup Stage" && (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-                {stages.map((stage) => (
-                  <Button
-                    key={stage}
-                    variant="outline"
-                    className="border-border text-foreground hover:bg-card-highlight hover:border-primary/40 justify-start"
-                  >
-                    <Rocket className="h-4 w-4 mr-2 text-primary" />
-                    {stage}
-                  </Button>
-                ))}
-              </div>
-            )}
+                {activeFilter === "Location" && (
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                    {locations.map((location) => (
+                      <Button
+                        key={location}
+                        variant="outline"
+                        className="h-auto py-4 border-2 border-border text-foreground hover:bg-card-highlight hover:border-primary/50 justify-start group transition-all"
+                      >
+                        <div className="flex items-center gap-3">
+                          <div className="p-2 rounded-md bg-primary/10 group-hover:bg-primary/20 transition-colors">
+                            <MapPin className="h-4 w-4 text-primary" />
+                          </div>
+                          <span className="font-medium">{location}</span>
+                        </div>
+                      </Button>
+                    ))}
+                  </div>
+                )}
 
-            {activeFilter === "Skills" && (
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                {skills.map((skill) => (
-                  <Button
-                    key={skill}
-                    variant="outline"
-                    className="border-border text-foreground hover:bg-card-highlight hover:border-primary/40 justify-start"
-                  >
-                    <Lightbulb className="h-4 w-4 mr-2 text-primary" />
-                    {skill}
-                  </Button>
-                ))}
+                {activeFilter === "Startup Stage" && (
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                    {stages.map((stage) => (
+                      <Button
+                        key={stage}
+                        variant="outline"
+                        className="h-auto py-4 border-2 border-border text-foreground hover:bg-card-highlight hover:border-primary/50 justify-start group transition-all"
+                      >
+                        <div className="flex items-center gap-3">
+                          <div className="p-2 rounded-md bg-primary/10 group-hover:bg-primary/20 transition-colors">
+                            <Rocket className="h-4 w-4 text-primary" />
+                          </div>
+                          <span className="font-medium">{stage}</span>
+                        </div>
+                      </Button>
+                    ))}
+                  </div>
+                )}
+
+                {activeFilter === "Skills" && (
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                    {skills.map((skill) => (
+                      <Button
+                        key={skill}
+                        variant="outline"
+                        className="h-auto py-4 border-2 border-border text-foreground hover:bg-card-highlight hover:border-primary/50 justify-start group transition-all"
+                      >
+                        <div className="flex items-center gap-3">
+                          <div className="p-2 rounded-md bg-primary/10 group-hover:bg-primary/20 transition-colors">
+                            <Lightbulb className="h-4 w-4 text-primary" />
+                          </div>
+                          <span className="font-medium">{skill}</span>
+                        </div>
+                      </Button>
+                    ))}
+                  </div>
+                )}
               </div>
-            )}
+            </div>
 
             <div className="flex justify-end">
               <Button 
