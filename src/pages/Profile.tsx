@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { MapPin, Link2, Mail, Edit, Share2, MessageSquare } from "lucide-react";
+import { MapPin, Link2, Mail, Edit, Share2, MessageSquare, ChevronDown, ChevronUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -9,6 +9,9 @@ import ProfileSidebar from "@/components/ProfileSidebar";
 import PromotionalSidebar from "@/components/PromotionalSidebar";
 
 const Profile = () => {
+  const [showFullBio, setShowFullBio] = useState(false);
+  const [showAllSkills, setShowAllSkills] = useState(false);
+
   const skills = [
     { name: "Crypto", icon: "💰" },
     { name: "Corporate Strategy", icon: "🎯" },
@@ -52,17 +55,13 @@ const Profile = () => {
           <main className="flex-1 space-y-6">
             {/* Profile Header Card */}
             <Card className="border-border bg-card overflow-hidden">
-              {/* Cover Photo with Gradient Overlay */}
-              <div className="relative h-48 bg-gradient-to-br from-primary via-primary/80 to-secondary overflow-hidden">
-                <div className="absolute inset-0 opacity-30">
-                  <div className="absolute top-10 left-10 text-6xl opacity-50">💡</div>
-                  <div className="absolute top-20 right-20 text-5xl opacity-40">🚀</div>
-                  <div className="absolute bottom-10 left-1/3 text-4xl opacity-35">💼</div>
-                </div>
+              {/* Cover Photo with Clean Gradient */}
+              <div className="relative h-48 bg-gradient-to-r from-primary/20 via-secondary/20 to-primary/20">
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-card/80" />
                 <Button
                   size="sm"
                   variant="outline"
-                  className="absolute top-4 right-4 bg-background/90 backdrop-blur-sm border-border hover:bg-background"
+                  className="absolute top-4 right-4 bg-background/90 backdrop-blur-sm border-border hover:bg-background z-10"
                 >
                   <Share2 className="h-4 w-4 mr-2" />
                   Share
@@ -126,52 +125,78 @@ const Profile = () => {
                 </div>
 
                 <div className="prose prose-sm max-w-none text-foreground space-y-4">
-                  <p>
-                    As the <strong>Founder & CEO of HypoMatrix</strong>, I specialize in crafting cutting-edge web and software solutions 
-                    that empower businesses to thrive in the digital age. With a deep understanding of both technology and business dynamics, 
-                    my mission is to bridge the gap between innovation and real-world impact.
-                  </p>
+                  <div className={showFullBio ? "" : "relative"}>
+                    <div className={showFullBio ? "" : "max-h-48 overflow-hidden"}>
+                      <p>
+                        As the <strong>Founder & CEO of HypoMatrix</strong>, I specialize in crafting cutting-edge web and software solutions 
+                        that empower businesses to thrive in the digital age. With a deep understanding of both technology and business dynamics, 
+                        my mission is to bridge the gap between innovation and real-world impact.
+                      </p>
 
-                  <p>
-                    In addition to leading HypoMatrix, I am a <strong>Technical Director at CFL</strong>, where I drive scalable solutions 
-                    and optimize core business processes.
-                  </p>
+                      <p>
+                        In addition to leading HypoMatrix, I am a <strong>Technical Director at CFL</strong>, where I drive scalable solutions 
+                        and optimize core business processes.
+                      </p>
 
-                  <p>
-                    On Upwork, I hold the <strong>Top Rated Plus Software Developer</strong> badge, recognized for consistently delivering 
-                    excellence to a global clientele.
-                  </p>
+                      <p>
+                        On Upwork, I hold the <strong>Top Rated Plus Software Developer</strong> badge, recognized for consistently delivering 
+                        excellence to a global clientele.
+                      </p>
 
-                  <div className="pt-4 border-t border-border">
-                    <h3 className="text-lg font-semibold mb-2">💡 What I Bring to the Table:</h3>
-                    <ul className="list-disc list-inside space-y-1 text-muted-foreground">
-                      <li>Expertise in developing tailored web and software solutions.</li>
-                      <li>A results-driven approach to streamline operations and enhance ROI.</li>
-                      <li>A collaborative mindset that works for companies with CTOs, founders, and decision-makers.</li>
-                    </ul>
+                      <div className="pt-4 border-t border-border">
+                        <h3 className="text-lg font-semibold mb-2">💡 What I Bring to the Table:</h3>
+                        <ul className="list-disc list-inside space-y-1 text-muted-foreground">
+                          <li>Expertise in developing tailored web and software solutions.</li>
+                          <li>A results-driven approach to streamline operations and enhance ROI.</li>
+                          <li>A collaborative mindset that works for companies with CTOs, founders, and decision-makers.</li>
+                        </ul>
+                      </div>
+
+                      <div className="pt-4 border-t border-border">
+                        <h3 className="text-lg font-semibold mb-2">📈 Beyond the Code:</h3>
+                        <p className="text-muted-foreground">
+                          I create engaging content on YouTube, sharing insights about technology, entrepreneurship, and personal growth 
+                          to inspire and educate my audience.
+                        </p>
+                      </div>
+
+                      <div className="pt-4 border-t border-border">
+                        <h3 className="text-lg font-semibold mb-2">🤝 Let's Connect:</h3>
+                        <p className="text-muted-foreground">
+                          Whether you're looking to enhance your digital presence, streamline your business with technology, or collaborate 
+                          on a visionary project, I'd love to hear from you. Together, we can turn ideas into impactful realities.
+                        </p>
+                      </div>
+
+                      <div className="pt-4">
+                        <p className="text-muted-foreground">
+                          🚀 <strong>Reach out today to explore how I can add value to your business journey!</strong>
+                        </p>
+                      </div>
+                    </div>
+                    {!showFullBio && (
+                      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-card to-transparent" />
+                    )}
                   </div>
 
-                  <div className="pt-4 border-t border-border">
-                    <h3 className="text-lg font-semibold mb-2">📈 Beyond the Code:</h3>
-                    <p className="text-muted-foreground">
-                      I create engaging content on YouTube, sharing insights about technology, entrepreneurship, and personal growth 
-                      to inspire and educate my audience.
-                    </p>
-                  </div>
-
-                  <div className="pt-4 border-t border-border">
-                    <h3 className="text-lg font-semibold mb-2">🤝 Let's Connect:</h3>
-                    <p className="text-muted-foreground">
-                      Whether you're looking to enhance your digital presence, streamline your business with technology, or collaborate 
-                      on a visionary project, I'd love to hear from you. Together, we can turn ideas into impactful realities.
-                    </p>
-                  </div>
-
-                  <div className="pt-4">
-                    <p className="text-muted-foreground">
-                      🚀 <strong>Reach out today to explore how I can add value to your business journey!</strong>
-                    </p>
-                  </div>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setShowFullBio(!showFullBio)}
+                    className="w-full gap-2 border-border hover:bg-card-highlight"
+                  >
+                    {showFullBio ? (
+                      <>
+                        <ChevronUp className="h-4 w-4" />
+                        Show Less
+                      </>
+                    ) : (
+                      <>
+                        <ChevronDown className="h-4 w-4" />
+                        Read More
+                      </>
+                    )}
+                  </Button>
 
                   <div className="flex flex-wrap gap-4 pt-4 border-t border-border">
                     <a href="#" className="flex items-center gap-2 text-primary hover:underline">
@@ -202,7 +227,7 @@ const Profile = () => {
                   <div>
                     <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide mb-4">Skills</h3>
                     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
-                      {skills.map((skill, index) => (
+                      {(showAllSkills ? skills : skills.slice(0, 10)).map((skill, index) => (
                         <div
                           key={index}
                           className="group flex flex-col items-center justify-center p-4 rounded-lg border-2 border-border bg-background hover:border-primary/40 hover:bg-card-highlight transition-all cursor-pointer"
@@ -212,6 +237,26 @@ const Profile = () => {
                         </div>
                       ))}
                     </div>
+                    {skills.length > 10 && (
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => setShowAllSkills(!showAllSkills)}
+                        className="w-full gap-2 border-border hover:bg-card-highlight mt-4"
+                      >
+                        {showAllSkills ? (
+                          <>
+                            <ChevronUp className="h-4 w-4" />
+                            Show Less
+                          </>
+                        ) : (
+                          <>
+                            <ChevronDown className="h-4 w-4" />
+                            Show All {skills.length} Skills
+                          </>
+                        )}
+                      </Button>
+                    )}
                   </div>
 
                   <div className="pt-4 border-t border-border">
