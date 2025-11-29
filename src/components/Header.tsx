@@ -1,4 +1,5 @@
 import { Search } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
@@ -28,10 +29,12 @@ const Header = () => {
           <Button variant="ghost" className="text-foreground hover:text-primary hidden sm:flex">
             Login
           </Button>
-          <Button className="bg-accent hover:bg-accent/90 text-accent-foreground font-medium text-sm sm:text-base px-3 sm:px-4">
-            <span className="hidden sm:inline">Find a CoFounder</span>
-            <span className="sm:hidden">Find</span>
-          </Button>
+          <Link to="/search">
+            <Button className="bg-accent hover:bg-accent/90 text-accent-foreground font-medium text-sm sm:text-base px-3 sm:px-4">
+              <span className="hidden sm:inline">Find a CoFounder</span>
+              <span className="sm:hidden">Find</span>
+            </Button>
+          </Link>
         </div>
       </div>
     </header>
