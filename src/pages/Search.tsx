@@ -1,8 +1,6 @@
 import { useState } from "react";
-import { RefreshCw } from "lucide-react";
+import { RefreshCw, User, DollarSign, Briefcase, MapPin, Rocket, Lightbulb } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Search as SearchIcon } from "lucide-react";
 import Header from "@/components/Header";
 import SearchSidebar from "@/components/SearchSidebar";
 import UserCard from "@/components/UserCard";
@@ -10,13 +8,19 @@ import UserCard from "@/components/UserCard";
 const Search = () => {
   const [activeFilter, setActiveFilter] = useState("Roles");
 
+  const [selectedRole, setSelectedRole] = useState<string | null>(null);
+
   const filters = ["Roles", "Location", "Startup Stage", "Skills"];
   
   const roles = [
-    { name: "Founder", icon: "👤" },
-    { name: "Investor", icon: "💰" },
-    { name: "Intern", icon: "💼" },
+    { name: "Founder", Icon: User },
+    { name: "Investor", Icon: DollarSign },
+    { name: "Intern", Icon: Briefcase },
   ];
+
+  const locations = ["United States", "United Kingdom", "Canada", "Germany", "India", "Remote"];
+  const stages = ["Idea Stage", "MVP", "Early Stage", "Growth Stage", "Scale-Up"];
+  const skills = ["Tech/Engineering", "Marketing", "Sales", "Design", "Finance", "Operations"];
 
   const users = [
     {
@@ -110,14 +114,68 @@ const Search = () => {
 
             {activeFilter === "Roles" && (
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {roles.map((role) => (
-                  <button
-                    key={role.name}
-                    className="flex flex-col items-center justify-center p-8 rounded-lg border border-border bg-card hover:bg-card-highlight transition-colors"
+                {roles.map((role) => {
+                  const IconComponent = role.Icon;
+                  const isSelected = selectedRole === role.name;
+                  return (
+                    <button
+                      key={role.name}
+                      onClick={() => setSelectedRole(isSelected ? null : role.name)}
+                      className={`flex flex-col items-center justify-center p-8 rounded-lg border transition-all ${
+                        isSelected
+                          ? "border-primary bg-primary/10"
+                          : "border-border bg-card hover:bg-card-highlight hover:border-primary/40"
+                      }`}
+                    >
+                      <IconComponent className={`h-12 w-12 mb-3 ${isSelected ? "text-primary" : "text-muted-foreground"}`} />
+                      <span className={`font-medium ${isSelected ? "text-primary" : "text-foreground"}`}>{role.name}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            )}
+
+            {activeFilter === "Location" && (
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                {locations.map((location) => (
+                  <Button
+                    key={location}
+                    variant="outline"
+                    className="border-border text-foreground hover:bg-card-highlight hover:border-primary/40 justify-start"
                   >
-                    <div className="text-4xl mb-3">{role.icon}</div>
-                    <span className="text-foreground font-medium">{role.name}</span>
-                  </button>
+                    <MapPin className="h-4 w-4 mr-2 text-primary" />
+                    {location}
+                  </Button>
+                ))}
+              </div>
+            )}
+
+            {activeFilter === "Startup Stage" && (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                {stages.map((stage) => (
+                  <Button
+                    key={stage}
+                    variant="outline"
+                    className="border-border text-foreground hover:bg-card-highlight hover:border-primary/40 justify-start"
+                  >
+                    <Rocket className="h-4 w-4 mr-2 text-primary" />
+                    {stage}
+                  </Button>
+                ))}
+              </div>
+            )}
+
+            {activeFilter === "Skills" && (
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                {skills.map((skill) => (
+                  <Button
+                    key={skill}
+                    variant="outline"
+                    className="border-border text-foreground hover:bg-card-highlight hover:border-primary/40 justify-start"
+                  >
+                    <Lightbulb className="h-4 w-4 mr-2 text-primary" />
+                    {skill}
+                  </Button>
                 ))}
               </div>
             )}
