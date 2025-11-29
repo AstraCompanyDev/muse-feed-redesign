@@ -128,7 +128,7 @@ const Search = () => {
                         <button
                           key={role.name}
                           onClick={() => setSelectedRole(isSelected ? null : role.name)}
-                          className={`group relative overflow-hidden rounded-lg border-2 transition-all hover:shadow-lg h-48 ${
+                          className={`group relative overflow-hidden rounded-lg border-2 transition-all hover:shadow-lg h-32 ${
                             isSelected
                               ? "border-primary shadow-md ring-2 ring-primary/20"
                               : "border-border hover:border-primary/50"
