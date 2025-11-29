@@ -4,6 +4,9 @@ import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
 import SearchSidebar from "@/components/SearchSidebar";
 import UserCard from "@/components/UserCard";
+import founderImage from "@/assets/founder-role.jpg";
+import investorImage from "@/assets/investor-role.jpg";
+import internImage from "@/assets/intern-role.jpg";
 
 const Search = () => {
   const [activeFilter, setActiveFilter] = useState("Roles");
@@ -13,9 +16,9 @@ const Search = () => {
   const filters = ["Roles", "Location", "Startup Stage", "Skills"];
   
   const roles = [
-    { name: "Founder", Icon: Rocket },
-    { name: "Investor", Icon: TrendingUp },
-    { name: "Intern", Icon: GraduationCap },
+    { name: "Founder", Icon: Rocket, image: founderImage },
+    { name: "Investor", Icon: TrendingUp, image: investorImage },
+    { name: "Intern", Icon: GraduationCap, image: internImage },
   ];
 
   const locations = ["United States", "United Kingdom", "Canada", "Germany", "India", "Remote"];
@@ -125,22 +128,36 @@ const Search = () => {
                         <button
                           key={role.name}
                           onClick={() => setSelectedRole(isSelected ? null : role.name)}
-                          className={`group flex flex-col items-center justify-center p-8 rounded-lg border-2 transition-all hover:shadow-md ${
+                          className={`group relative overflow-hidden rounded-lg border-2 transition-all hover:shadow-lg h-48 ${
                             isSelected
-                              ? "border-primary bg-primary/5 shadow-sm"
-                              : "border-border bg-background hover:bg-card-highlight hover:border-primary/40"
+                              ? "border-primary shadow-md ring-2 ring-primary/20"
+                              : "border-border hover:border-primary/50"
                           }`}
                         >
-                          <div className={`mb-4 p-4 rounded-full transition-colors ${
-                            isSelected ? "bg-primary/10" : "bg-muted group-hover:bg-primary/5"
-                          }`}>
-                            <IconComponent className={`h-8 w-8 transition-colors ${
-                              isSelected ? "text-primary" : "text-muted-foreground group-hover:text-primary"
-                            }`} />
+                          <img 
+                            src={role.image} 
+                            alt={role.name}
+                            className="absolute inset-0 w-full h-full object-cover transition-transform group-hover:scale-105"
+                          />
+                          <div className={`absolute inset-0 bg-gradient-to-t transition-all ${
+                            isSelected 
+                              ? "from-primary/90 via-primary/50 to-transparent" 
+                              : "from-background/90 via-background/50 to-transparent group-hover:from-primary/80 group-hover:via-primary/40"
+                          }`} />
+                          <div className="absolute bottom-0 left-0 right-0 p-6 flex flex-col items-center">
+                            <div className={`mb-2 p-3 rounded-full transition-colors ${
+                              isSelected ? "bg-primary-foreground/20" : "bg-background/50 group-hover:bg-primary-foreground/20"
+                            }`}>
+                              <IconComponent className={`h-6 w-6 transition-colors ${
+                                isSelected ? "text-primary-foreground" : "text-foreground group-hover:text-primary-foreground"
+                              }`} />
+                            </div>
+                            <span className={`font-semibold text-lg transition-colors ${
+                              isSelected ? "text-primary-foreground" : "text-foreground group-hover:text-primary-foreground"
+                            }`}>
+                              {role.name}
+                            </span>
                           </div>
-                          <span className={`font-semibold ${isSelected ? "text-primary" : "text-foreground"}`}>
-                            {role.name}
-                          </span>
                         </button>
                       );
                     })}
