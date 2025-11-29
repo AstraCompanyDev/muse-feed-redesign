@@ -7,6 +7,7 @@ import Index from "./pages/Index";
 import Search from "./pages/Search";
 import ProfileViews from "./pages/ProfileViews";
 import Profile from "./pages/Profile";
+import ProfileSettings from "./pages/ProfileSettings";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -22,6 +23,7 @@ const App = () => (
           <Route path="/search" element={<Search />} />
           <Route path="/profile-views" element={<ProfileViews />} />
           <Route path="/profile/:username" element={<Profile />} />
+          <Route path="/settings/profile" element={<ProfileSettings />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
