@@ -30,20 +30,20 @@ const UserCard = ({ name, title, avatar, online = false }: UserCardProps) => {
           <h3 className="mt-4 font-semibold text-foreground">{name}</h3>
           <p className="text-sm text-muted-foreground mt-1 line-clamp-1">{title}</p>
 
-          <div className="flex gap-2 mt-4 w-full">
+          <div className="flex gap-3 mt-4 w-full">
             <Button 
               variant="outline" 
               size="sm" 
-              className="flex-1 gap-1 border-border hover:bg-card-highlight text-foreground"
+              className="flex-1 gap-1.5 border-border hover:bg-card-highlight text-foreground h-10"
             >
-              <Send className="h-3.5 w-3.5 shrink-0" />
+              <Send className="h-4 w-4" />
               Message
             </Button>
             <Button 
               size="sm" 
-              className="flex-1 gap-1 bg-primary hover:bg-primary/90 text-primary-foreground"
+              className="flex-1 gap-1.5 bg-primary hover:bg-primary/90 text-primary-foreground h-10"
             >
-              <Link2 className="h-3.5 w-3.5 shrink-0" />
+              <Link2 className="h-4 w-4" />
               Connect
             </Button>
           </div>
