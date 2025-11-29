@@ -9,6 +9,7 @@ import ProfileViews from "./pages/ProfileViews";
 import Profile from "./pages/Profile";
 import ProfileSettings from "./pages/ProfileSettings";
 import Notifications from "./pages/Notifications";
+import Messages from "./pages/Messages";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -26,6 +27,7 @@ const App = () => (
           <Route path="/profile/:username" element={<Profile />} />
           <Route path="/settings/profile" element={<ProfileSettings />} />
           <Route path="/notifications" element={<Notifications />} />
+          <Route path="/messages" element={<Messages />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
