@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { RefreshCw, User, DollarSign, Briefcase, MapPin, Rocket, Lightbulb } from "lucide-react";
+import { RefreshCw, MapPin, Rocket, Lightbulb, TrendingUp, GraduationCap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
 import SearchSidebar from "@/components/SearchSidebar";
@@ -13,9 +13,9 @@ const Search = () => {
   const filters = ["Roles", "Location", "Startup Stage", "Skills"];
   
   const roles = [
-    { name: "Founder", Icon: User },
-    { name: "Investor", Icon: DollarSign },
-    { name: "Intern", Icon: Briefcase },
+    { name: "Founder", Icon: Rocket },
+    { name: "Investor", Icon: TrendingUp },
+    { name: "Intern", Icon: GraduationCap },
   ];
 
   const locations = ["United States", "United Kingdom", "Canada", "Germany", "India", "Remote"];
