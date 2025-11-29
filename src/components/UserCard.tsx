@@ -34,17 +34,17 @@ const UserCard = ({ name, title, avatar, online = false }: UserCardProps) => {
             <Button 
               variant="outline" 
               size="sm" 
-              className="flex-1 gap-1 border-border hover:bg-card-highlight text-foreground min-w-0"
+              className="flex-1 gap-1 border-border hover:bg-card-highlight text-foreground"
             >
               <Send className="h-3.5 w-3.5 shrink-0" />
-              <span className="truncate">Message</span>
+              Message
             </Button>
             <Button 
               size="sm" 
-              className="flex-1 gap-1 bg-primary hover:bg-primary/90 text-primary-foreground min-w-0"
+              className="flex-1 gap-1 bg-primary hover:bg-primary/90 text-primary-foreground"
             >
               <Link2 className="h-3.5 w-3.5 shrink-0" />
-              <span className="truncate">Connect</span>
+              Connect
             </Button>
           </div>
         </div>
