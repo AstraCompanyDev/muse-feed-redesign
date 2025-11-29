@@ -1,4 +1,5 @@
 import { Eye, Users, Compass, UserPlus, UserSearch, MessageSquare, Bell, Mail } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -21,13 +22,13 @@ const SearchSidebar = () => {
           </div>
 
           <div className="mt-6 space-y-2">
-            <div className="flex items-center justify-between text-sm px-3 py-2">
+            <Link to="/profile-views" className="flex items-center justify-between text-sm px-3 py-2 rounded-lg hover:bg-card-highlight transition-colors">
               <div className="flex items-center gap-2">
                 <Eye className="h-4 w-4 text-primary" />
                 <span className="text-foreground">Who viewed your profile</span>
               </div>
               <span className="text-muted-foreground">0</span>
-            </div>
+            </Link>
             <div className="flex items-center justify-between text-sm px-3 py-2">
               <div className="flex items-center gap-2">
                 <Users className="h-4 w-4 text-primary" />

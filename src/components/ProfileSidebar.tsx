@@ -1,4 +1,5 @@
 import { Eye, Users, Compass, UserPlus, UserSearch } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -20,10 +21,10 @@ const ProfileSidebar = () => {
           </div>
 
           <div className="mt-6 space-y-3">
-            <button className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm text-foreground hover:bg-card-highlight transition-colors">
+            <Link to="/profile-views" className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm text-foreground hover:bg-card-highlight transition-colors">
               <Eye className="h-4 w-4 text-primary" />
               <span>Who viewed your profile</span>
-            </button>
+            </Link>
             <button className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm text-foreground hover:bg-card-highlight transition-colors">
               <Users className="h-4 w-4 text-primary" />
               <span>Connections</span>
