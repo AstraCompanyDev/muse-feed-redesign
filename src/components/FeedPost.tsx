@@ -1,7 +1,14 @@
-import { Heart, MessageCircle, Share2, MoreHorizontal, CheckCircle2 } from "lucide-react";
+import { Heart, MessageCircle, Share2, MoreHorizontal, CheckCircle2, TrendingUp, TrendingDown } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
+
+interface StockQuote {
+  symbol: string;
+  name: string;
+  price: number;
+  change: number; // percent, e.g. 2.4 or -1.1
+}
 
 interface FeedPostProps {
   author: {
@@ -16,6 +23,7 @@ interface FeedPostProps {
   likes?: number;
   comments?: number;
   tone?: "blue" | "yellow" | "lilac";
+  stock?: StockQuote;
 }
 
 const FeedPost = ({ author, title, timestamp, content, image, likes = 0, comments = 0, tone = "blue" }: FeedPostProps) => {
