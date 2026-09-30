@@ -170,11 +170,11 @@ const streams = [
 ];
 
 const Index = () => {
-  const [activeFeed, setActiveFeed] = useState(0);
+  const [activeStream, setActiveStream] = useState(0);
   const touchStart = useRef<{ x: number; y: number } | null>(null);
 
-  const selectFeed = (index: number) => {
-    setActiveFeed(Math.max(0, Math.min(feeds.length - 1, index)));
+  const selectStream = (index: number) => {
+    setActiveStream(Math.max(0, Math.min(streams.length - 1, index)));
   };
 
   return (
