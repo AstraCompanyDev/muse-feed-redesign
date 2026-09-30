@@ -128,6 +128,15 @@ Drop a comment if you want your deck reviewed — I'll pick 3.`,
 const marketStreamPosts = [
   {
     author: { name: "Upfounder Markets", avatar: "https://api.dicebear.com/7.x/initials/svg?seed=UM", verified: true },
+    title: "Stock Watch: NVDA",
+    timestamp: "Today, 10:05 AM",
+    content: `Nvidia is today's standout mover, climbing on strong data-centre demand as AI spending keeps accelerating. Analysts lifted their price targets after the chipmaker beat on revenue, and the stock is now one of the best performers in the NASDAQ this week.`,
+    stock: { symbol: "NVDA", name: "NVIDIA Corp", price: 121.44, change: 2.8 },
+    likes: 96,
+    comments: 28,
+  },
+  {
+    author: { name: "Upfounder Markets", avatar: "https://api.dicebear.com/7.x/initials/svg?seed=UM", verified: true },
     title: "Market Open: Tech Leads as NASDAQ Climbs 1.2%",
     timestamp: "Today, 09:35 AM",
     content: `📈 US stocks opened higher as chipmakers rallied.
@@ -265,7 +274,7 @@ const Index = () => {
             >
               {activeStream === 3 && <MarketTicker />}
               {streams[activeStream].posts.map((post, index) => (
-                <FeedPost key={post.author.name} tone={index % 3 === 0 ? "blue" : index % 3 === 1 ? "yellow" : "lilac"} {...post} />
+                <FeedPost key={post.title} tone={index % 3 === 0 ? "blue" : index % 3 === 1 ? "yellow" : "lilac"} {...post} />
               ))}
             </div>
 
