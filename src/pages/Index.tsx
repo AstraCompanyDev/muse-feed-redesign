@@ -11,6 +11,10 @@ import PromotionalSidebar from "@/components/PromotionalSidebar";
 import founderStory01 from "@/assets/founder-story-01.jpg";
 import founderStory02 from "@/assets/founder-story-02.jpg";
 import founderStory03 from "@/assets/founder-story-03.jpg";
+import pollA from "@/assets/poll-logo-a.jpg";
+import pollB from "@/assets/poll-logo-b.jpg";
+import pollC from "@/assets/poll-logo-c.jpg";
+import pollD from "@/assets/poll-logo-d.jpg";
 
 const mainStreamPosts = [
   {
@@ -25,6 +29,23 @@ const mainStreamPosts = [
     ],
     likes: 38,
     comments: 12,
+  },
+  {
+    author: { name: "Jordan Blake", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=JordanBlake", verified: true },
+    title: "Help Us Pick Our App Design",
+    timestamp: "Today, 11:50 AM",
+    content: "We're down to four design directions for our launch. Which one would make you download the app?",
+    poll: {
+      question: "Which design should we launch with?",
+      options: [
+        { label: "Clean Minimal", votes: 57, image: pollA },
+        { label: "Bold Dashboard", votes: 34, image: pollB },
+        { label: "Dark Mode", votes: 71, image: pollC },
+        { label: "Playful", votes: 22, image: pollD },
+      ],
+    },
+    likes: 29,
+    comments: 18,
   },
   {
     author: { name: "Upfounder Community", avatar: "https://api.dicebear.com/7.x/initials/svg?seed=UC", verified: true },

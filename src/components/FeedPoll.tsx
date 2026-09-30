@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 
 export interface PollData {
   question: string;
-  options: { label: string; votes: number }[];
+  options: { label: string; votes: number; image?: string }[];
 }
 
 // Subtle colour tints that identify each poll option, in light and dark mode.
@@ -19,6 +19,61 @@ const FeedPoll = ({ poll }: { poll: PollData }) => {
   const [selected, setSelected] = useState<number | null>(null);
   const [vote, setVote] = useState<number | null>(null);
   const total = poll.options.reduce((sum, option) => sum + option.votes, 0) + (vote === null ? 0 : 1);
+
+  const hasImages = poll.options.some((o) => o.image);
+
+  if (hasImages) {
+    return (
+      <div className="space-y-3" aria-label="Poll">
+        <h4 className="font-semibold text-foreground">{poll.question}</h4>
+        <div className="grid grid-cols-2 gap-3" role={vote === null ? "radiogroup" : "group"} aria-label={poll.question}>
+          {poll.options.map((option, index) => {
+            const tint = optionTints[index % optionTints.length];
+            const count = option.votes + (vote === index ? 1 : 0);
+            const percentage = total > 0 ? Math.round((count / total) * 100) : 0;
+            const isPicked = vote === null ? selected === index : vote === index;
+            return (
+              <button
+                key={option.label}
+                type="button"
+                role={vote === null ? "radio" : undefined}
+                aria-checked={vote === null ? selected === index : undefined}
+                disabled={vote !== null}
+                onClick={(e) => { e.stopPropagation(); setSelected(index); }}
+                className={`overflow-hidden rounded-xl border text-left transition-colors ${isPicked ? tint.selected : "border-border bg-background"}`}
+              >
+                <div className="relative aspect-square w-full">
+                  <img src={option.image} alt={option.label} loading="lazy" className="h-full w-full object-cover" />
+                  {isPicked && (
+                    <span className="absolute right-2 top-2 flex h-7 w-7 items-center justify-center rounded-full bg-background/90">
+                      <Check className={`h-4 w-4 ${tint.check}`} />
+                    </span>
+                  )}
+                </div>
+                <div className="relative overflow-hidden">
+                  {vote !== null && <div className={`absolute inset-y-0 left-0 transition-[width] duration-500 ${tint.fill}`} style={{ width: `${percentage}%` }} />}
+                  <div className="relative flex items-center justify-between gap-2 px-3 py-2 text-sm text-foreground">
+                    <span className="font-medium">{option.label}</span>
+                    {vote !== null && <span className="font-semibold tabular-nums">{percentage}%</span>}
+                  </div>
+                </div>
+              </button>
+            );
+          })}
+        </div>
+        {vote === null ? (
+          <div className="flex items-center justify-between gap-3">
+            <span className="text-xs text-muted-foreground">{total} votes</span>
+            <Button size="sm" disabled={selected === null} onClick={(e) => { e.stopPropagation(); setVote(selected); }} className="gap-2 rounded-md">
+              <Vote className="h-4 w-4" /> Vote
+            </Button>
+          </div>
+        ) : (
+          <p className="text-xs text-muted-foreground">{total} votes · Thanks for voting</p>
+        )}
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-3" aria-label="Poll">
