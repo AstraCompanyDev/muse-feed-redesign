@@ -7,3 +7,4 @@
 - [x] Add a Main Stream post with three vertically stacked image rows.
 - [x] Add varied sample posts to each of the four Streams.
 - [x] Add an interactive voting poll to a Stream.
+- [x] Make the Meetings and Network buttons open usable pages.

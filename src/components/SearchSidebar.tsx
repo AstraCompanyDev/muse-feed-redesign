@@ -39,11 +39,11 @@ const SearchSidebar = () => {
           </div>
 
           <div className="mt-4 space-y-2">
-            <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
-              Manage Your Meetings
+            <Button asChild className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
+              <Link to="/meetings">Manage Your Meetings</Link>
             </Button>
-            <Button variant="outline" className="w-full border-border hover:bg-card-highlight text-foreground">
-              Manage Your Network
+            <Button asChild variant="outline" className="w-full border-border hover:bg-card-highlight text-foreground">
+              <Link to="/network">Manage Your Network</Link>
             </Button>
           </div>
         </CardContent>
