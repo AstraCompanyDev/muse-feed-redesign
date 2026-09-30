@@ -2,7 +2,7 @@ import { Search } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import logo from "@/assets/upfounder-logo.jpeg.asset.json";
+import logo from "@/assets/upfounder-logo.jpeg";
 
 const Header = () => {
   return (
