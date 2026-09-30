@@ -231,6 +231,77 @@ const FeedPost = ({ author, title, timestamp, content, image, imageRows, poll, l
         </div>
       </CardContent>
     </Card>
+
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogContent className="max-h-[90vh] max-w-3xl overflow-y-auto">
+        <DialogHeader>
+          <div className="flex items-center gap-3 text-left">
+            <Avatar className="h-10 w-10 shrink-0">
+              <AvatarImage src={author.avatar} />
+              <AvatarFallback className="bg-primary text-primary-foreground">{author.name.charAt(0)}</AvatarFallback>
+            </Avatar>
+            <div className="min-w-0">
+              <DialogTitle className="flex items-center gap-2 text-base">
+                <span className="truncate">{author.name}</span>
+                {author.verified && <CheckCircle2 className="h-4 w-4 shrink-0 fill-primary text-primary" />}
+              </DialogTitle>
+              <DialogDescription className="truncate">{title} · {timestamp}</DialogDescription>
+            </div>
+          </div>
+        </DialogHeader>
+
+        {photos.length > 0 && (
+          <div className="relative">
+            <img
+              src={photos[activePhoto].src}
+              alt={photos[activePhoto].alt}
+              className="max-h-[60vh] w-full rounded-lg border border-border object-contain"
+            />
+            {photos.length > 1 && (
+              <>
+                <Button variant="outline" size="icon" aria-label="Previous image" onClick={() => stepPhoto(-1)} className="absolute left-2 top-1/2 h-9 w-9 -translate-y-1/2 rounded-full bg-card">
+                  <ChevronLeft className="h-4 w-4" />
+                </Button>
+                <Button variant="outline" size="icon" aria-label="Next image" onClick={() => stepPhoto(1)} className="absolute right-2 top-1/2 h-9 w-9 -translate-y-1/2 rounded-full bg-card">
+                  <ChevronRight className="h-4 w-4" />
+                </Button>
+                <div className="mt-2 text-center text-xs text-muted-foreground">
+                  {activePhoto + 1} / {photos.length}
+                </div>
+              </>
+            )}
+          </div>
+        )}
+
+        {stock && (
+          <div className="rounded-xl border border-border bg-background p-4">
+            <div className="flex items-center justify-between">
+              <span className="text-base font-bold text-foreground">{stock.symbol}</span>
+              <span className={`flex items-center gap-1 text-sm font-semibold tabular-nums ${stock.change >= 0 ? "text-emerald-500" : "text-destructive"}`}>
+                {stock.change >= 0 ? <TrendingUp className="h-4 w-4" /> : <TrendingDown className="h-4 w-4" />}
+                {stock.change >= 0 ? "+" : ""}
+                {stock.change.toFixed(2)}%
+              </span>
+            </div>
+            <div className="mt-1 text-2xl font-bold tabular-nums text-foreground">
+              ${stock.price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+            </div>
+            <div className="mt-0.5 text-xs text-muted-foreground">{stock.name} · Today</div>
+          </div>
+        )}
+
+        <p className="whitespace-pre-line text-sm leading-relaxed text-foreground">{content}</p>
+
+        {poll && <FeedPoll poll={poll} />}
+
+        <div className="flex items-center gap-4 border-t border-border pt-4 text-sm text-muted-foreground">
+          <span className="flex items-center gap-1.5"><Heart className="h-4 w-4" />{likes}</span>
+          <span className="flex items-center gap-1.5"><MessageCircle className="h-4 w-4" />{comments}</span>
+          <span className="flex items-center gap-1.5"><Share2 className="h-4 w-4" />Share</span>
+        </div>
+      </DialogContent>
+    </Dialog>
+    </>
   );
 };
 
