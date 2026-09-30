@@ -161,7 +161,7 @@ const FeedPost = ({ author, title, timestamp, content, image, likes = 0, comment
               </div>
               <p className="min-w-0 flex-1 text-sm sm:text-base text-foreground leading-relaxed">{content}</p>
             </div>
-          ) : (
+          ) : advisors && advisors.length > 0 ? null : (
             <p className="text-sm sm:text-base text-foreground leading-relaxed whitespace-pre-line">{content}</p>
           )}
           
