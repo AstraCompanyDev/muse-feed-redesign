@@ -181,13 +181,14 @@ const Index = () => {
     <div className="h-dvh overflow-hidden bg-background bg-gradient-page">
       <Header />
       
-      <div className="container mx-auto h-[calc(100dvh-4rem)] px-4 pb-0">
-        <div className="flex h-full flex-col justify-center gap-6 lg:flex-row">
-          <div className="hidden h-full lg:block">
-            <ProfileSidebar />
-          </div>
-          
-          <main className="flex min-h-0 min-w-0 w-full flex-1 flex-col gap-3 lg:max-w-2xl pt-4 sm:pt-6">
+      <div className="flex h-[calc(100dvh-4rem)] w-full">
+        <div className="hidden h-full shrink-0 lg:block">
+          <ProfileSidebar />
+        </div>
+
+        <div className="min-w-0 flex-1">
+          <div className="mx-auto flex h-full max-w-6xl gap-6 px-4 sm:px-6">
+          <main className="flex min-h-0 min-w-0 w-full flex-1 flex-col gap-3 lg:max-w-3xl pt-4 sm:pt-6">
 
             <div className="flex shrink-0 items-center gap-2" aria-label="Streams">
               <div className="flex min-w-0 flex-1 gap-1 overflow-x-auto" role="tablist" aria-label="Streams">
@@ -251,6 +252,7 @@ const Index = () => {
 
           <div className="hidden overflow-y-auto pt-6 xl:block">
             <PromotionalSidebar />
+          </div>
           </div>
         </div>
       </div>
