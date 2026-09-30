@@ -7,6 +7,14 @@ export interface PollData {
   options: { label: string; votes: number }[];
 }
 
+// Subtle colour tints that identify each poll option, in light and dark mode.
+const optionTints = [
+  { fill: "bg-emerald-500/25", selected: "border-emerald-500/40 bg-emerald-500/10", check: "text-emerald-600 dark:text-emerald-400" },
+  { fill: "bg-sky-500/25", selected: "border-sky-500/40 bg-sky-500/10", check: "text-sky-600 dark:text-sky-400" },
+  { fill: "bg-amber-500/25", selected: "border-amber-500/40 bg-amber-500/10", check: "text-amber-600 dark:text-amber-400" },
+  { fill: "bg-violet-500/25", selected: "border-violet-500/40 bg-violet-500/10", check: "text-violet-600 dark:text-violet-400" },
+];
+
 const FeedPoll = ({ poll }: { poll: PollData }) => {
   const [selected, setSelected] = useState<number | null>(null);
   const [vote, setVote] = useState<number | null>(null);
@@ -17,6 +25,7 @@ const FeedPoll = ({ poll }: { poll: PollData }) => {
       <h4 className="font-semibold text-foreground">{poll.question}</h4>
       <div className="space-y-2" role={vote === null ? "radiogroup" : "group"} aria-label={poll.question}>
         {poll.options.map((option, index) => {
+          const tint = optionTints[index % optionTints.length];
           const count = option.votes + (vote === index ? 1 : 0);
           const percentage = total > 0 ? Math.round((count / total) * 100) : 0;
           return vote === null ? (
@@ -27,18 +36,22 @@ const FeedPoll = ({ poll }: { poll: PollData }) => {
               role="radio"
               aria-checked={selected === index}
               onClick={() => setSelected(index)}
-              className={`h-auto min-h-11 w-full justify-start whitespace-normal rounded-md px-4 py-2 text-left text-sm ${selected === index ? "border-primary bg-accent text-foreground" : "bg-background text-foreground"}`}
+              className={`h-auto min-h-11 w-full justify-start whitespace-normal rounded-md px-4 py-2 text-left text-sm transition-colors ${selected === index ? `${tint.selected} text-foreground` : "border-border bg-background text-foreground"}`}
             >
               <span className="flex w-full items-center justify-between gap-3">
                 <span>{option.label}</span>
-                {selected === index && <Check className="h-4 w-4 shrink-0 text-primary" />}
+                {selected === index && <Check className={`h-4 w-4 shrink-0 ${tint.check}`} />}
               </span>
             </Button>
           ) : (
-            <div key={option.label} className="relative min-h-11 overflow-hidden rounded-md border border-border bg-muted" aria-label={`${option.label}: ${percentage} percent` }>
-              <div className="absolute inset-y-0 left-0 bg-accent transition-[width] duration-500" style={{ width: `${percentage}%` }} />
+            <div
+              key={option.label}
+              className="relative min-h-11 overflow-hidden rounded-md border border-border bg-muted"
+              aria-label={`${option.label}: ${percentage} percent`}
+            >
+              <div className={`absolute inset-y-0 left-0 transition-[width] duration-500 ${tint.fill}`} style={{ width: `${percentage}%` }} />
               <div className="relative flex min-h-11 items-center justify-between gap-3 px-4 py-2 text-sm text-foreground">
-                <span className="flex items-center gap-2 font-medium">{option.label}{vote === index && <Check className="h-4 w-4 text-primary" />}</span>
+                <span className="flex items-center gap-2 font-medium">{option.label}{vote === index && <Check className={`h-4 w-4 shrink-0 ${tint.check}`} />}</span>
                 <span className="shrink-0 font-semibold tabular-nums">{percentage}%</span>
               </div>
             </div>

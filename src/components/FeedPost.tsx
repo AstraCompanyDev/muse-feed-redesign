@@ -173,9 +173,9 @@ const FeedPost = ({ author, title, timestamp, content, image, imageRows, poll, l
           {poll && <FeedPoll poll={poll} />}
 
           {imageRows && imageRows.length > 0 && (
-            <div className="grid gap-2" aria-label="Post photos">
+            <div className="grid grid-cols-3 gap-2" aria-label="Post photos">
               {imageRows.map((photo) => (
-                <img key={photo.src} src={photo.src} alt={photo.alt} loading="lazy" width={1200} height={640} className="aspect-[15/8] w-full rounded-md border border-border object-cover" />
+                <img key={photo.src} src={photo.src} alt={photo.alt} loading="lazy" width={640} height={640} className="aspect-square w-full rounded-md border border-border object-cover" />
               ))}
             </div>
           )}
