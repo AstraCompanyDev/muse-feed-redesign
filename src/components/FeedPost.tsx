@@ -1,8 +1,9 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Heart, MessageCircle, Share2, MoreHorizontal, CheckCircle2, TrendingUp, TrendingDown, ChevronLeft, ChevronRight, Star } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import FeedPoll, { type PollData } from "@/components/FeedPoll";
 
 interface StockQuote {
