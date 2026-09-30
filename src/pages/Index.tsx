@@ -101,11 +101,7 @@ const Index = () => {
           </div>
           
           <main className="flex min-h-0 min-w-0 w-full flex-1 flex-col gap-3 lg:max-w-2xl">
-            <div className="flex items-center justify-between gap-3">
-              <div className="min-w-0">
-                <h1 className="text-xl font-semibold text-foreground">Your feed</h1>
-                <p className="text-sm text-muted-foreground">{feeds[activeFeed].description}</p>
-              </div>
+            <div className="flex items-center justify-end gap-3">
               <Button variant="outline" size="icon" aria-label="Refresh feed" title="Refresh feed" className="shrink-0 border-primary text-primary hover:bg-primary hover:text-primary-foreground" onClick={() => selectFeed(0)}>
                 <RefreshCw className="h-4 w-4" />
               </Button>
