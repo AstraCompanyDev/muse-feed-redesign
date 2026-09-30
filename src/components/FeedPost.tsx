@@ -182,10 +182,10 @@ const FeedPost = ({ author, title, timestamp, content, image, imageRows, poll, l
                 </div>
                 <div className="mt-0.5 text-xs text-muted-foreground">{stock.name} · Today</div>
               </div>
-              <p className="min-w-0 flex-1 text-sm sm:text-base text-foreground leading-relaxed">{content}</p>
+              <p role="button" tabIndex={0} onClick={() => openPost()} onKeyDown={(e) => e.key === "Enter" && openPost()} className="min-w-0 flex-1 cursor-pointer text-sm sm:text-base text-foreground leading-relaxed">{content}</p>
             </div>
           ) : advisors && advisors.length > 0 ? null : (
-            <p className="text-sm sm:text-base text-foreground leading-relaxed whitespace-pre-line">{content}</p>
+            <p role="button" tabIndex={0} onClick={() => openPost()} onKeyDown={(e) => e.key === "Enter" && openPost()} className="cursor-pointer text-sm sm:text-base text-foreground leading-relaxed whitespace-pre-line">{content}</p>
           )}
           
           {advisors && advisors.length > 0 && <AdvisorCarousel advisors={advisors} />}
