@@ -8,7 +8,7 @@ import logoUrl from "@/assets/upfounder-logo.jpeg";
 const Header = () => {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border bg-card">
-      <div className="container flex h-12 items-center gap-2 sm:gap-4 px-4">
+      <div className="flex h-12 w-full items-center gap-2 px-4 sm:gap-4">
         <Link to="/" className="flex items-center shrink-0">
           <img src={logoUrl} alt="Upfounder" className="h-7 w-auto" />
         </Link>
