@@ -1,4 +1,5 @@
-import { Heart, MessageCircle, Share2, MoreHorizontal, CheckCircle2, TrendingUp, TrendingDown } from "lucide-react";
+import { useRef } from "react";
+import { Heart, MessageCircle, Share2, MoreHorizontal, CheckCircle2, TrendingUp, TrendingDown, ChevronLeft, ChevronRight, Star } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -8,6 +9,16 @@ interface StockQuote {
   name: string;
   price: number;
   change: number; // percent, e.g. 2.4 or -1.1
+}
+
+export interface Advisor {
+  name: string;
+  avatar: string;
+  role: string;
+  expertise: string;
+  rating: number; // e.g. 4.9
+  sessions: number; // advising sessions completed
+  available: boolean;
 }
 
 interface FeedPostProps {
@@ -24,9 +35,86 @@ interface FeedPostProps {
   comments?: number;
   tone?: "blue" | "yellow" | "lilac";
   stock?: StockQuote;
+  advisors?: Advisor[];
 }
 
-const FeedPost = ({ author, title, timestamp, content, image, likes = 0, comments = 0, tone = "blue", stock }: FeedPostProps) => {
+const AdvisorCarousel = ({ advisors }: { advisors: Advisor[] }) => {
+  const trackRef = useRef<HTMLDivElement>(null);
+
+  const scrollByCard = (direction: 1 | -1) => {
+    const track = trackRef.current;
+    if (!track) return;
+    const card = track.querySelector<HTMLElement>("[data-advisor-card]");
+    const step = card ? card.offsetWidth + 12 : track.clientWidth / 4;
+    track.scrollBy({ left: direction * step, behavior: "smooth" });
+  };
+
+  return (
+    <div className="relative">
+      <div
+        ref={trackRef}
+        className="flex snap-x gap-3 overflow-x-auto scroll-smooth pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        aria-label="Featured advisors"
+      >
+        {advisors.map((advisor) => (
+          <div
+            key={advisor.name}
+            data-advisor-card
+            className="w-[calc((100%-0.75rem)/2)] shrink-0 snap-start rounded-xl border border-border bg-card p-4 sm:w-[calc((100%-2.25rem)/4)]"
+          >
+            <div className="flex flex-col items-center text-center">
+              <Avatar className="h-14 w-14 shrink-0">
+                <AvatarImage src={advisor.avatar} />
+                <AvatarFallback className="bg-primary text-primary-foreground">
+                  {advisor.name.charAt(0)}
+                </AvatarFallback>
+              </Avatar>
+              <h4 className="mt-2 w-full truncate text-sm font-semibold text-foreground">{advisor.name}</h4>
+              <p className="w-full truncate text-xs text-muted-foreground">{advisor.role}</p>
+              <div className="mt-1 flex items-center gap-1 text-xs text-muted-foreground">
+                <Star className="h-3 w-3 fill-amber-400 text-amber-400" />
+                <span className="font-medium text-foreground">{advisor.rating}</span>
+                <span>· {advisor.sessions} sessions</span>
+              </div>
+              <p className="mt-2 line-clamp-2 min-h-8 text-xs leading-relaxed text-muted-foreground">{advisor.expertise}</p>
+              <div className="mt-2 flex items-center gap-1.5 text-xs">
+                <span
+                  className={`h-1.5 w-1.5 rounded-full ${advisor.available ? "bg-emerald-500" : "bg-muted-foreground"}`}
+                />
+                <span className={advisor.available ? "text-emerald-600 dark:text-emerald-400" : "text-muted-foreground"}>
+                  {advisor.available ? "Available" : "Waitlist"}
+                </span>
+              </div>
+              <Button size="sm" className="mt-3 h-8 w-full rounded-full text-xs">
+                Connect
+              </Button>
+            </div>
+          </div>
+        ))}
+      </div>
+      <Button
+        variant="outline"
+        size="icon"
+        aria-label="Previous advisors"
+        onClick={() => scrollByCard(-1)}
+        className="absolute -left-2 top-1/2 hidden h-8 w-8 -translate-y-1/2 rounded-full bg-card sm:flex"
+      >
+        <ChevronLeft className="h-4 w-4" />
+      </Button>
+      <Button
+        variant="outline"
+        size="icon"
+        aria-label="Next advisors"
+        onClick={() => scrollByCard(1)}
+        className="absolute -right-2 top-1/2 hidden h-8 w-8 -translate-y-1/2 rounded-full bg-card sm:flex"
+      >
+        <ChevronRight className="h-4 w-4" />
+      </Button>
+    </div>
+  );
+};
+
+const FeedPost = ({ author, title, timestamp, content, image, likes = 0, comments = 0, tone = "blue", stock, advisors }: FeedPostProps) => {
   return (
     <Card className={`border-border shadow-none transition-colors ${tone === "blue" ? "bg-feed-blue" : tone === "yellow" ? "bg-feed-yellow" : "bg-feed-lilac"}`}>
       <CardContent className="p-4 sm:p-6">
@@ -77,6 +165,8 @@ const FeedPost = ({ author, title, timestamp, content, image, likes = 0, comment
             <p className="text-sm sm:text-base text-foreground leading-relaxed whitespace-pre-line">{content}</p>
           )}
           
+          {advisors && advisors.length > 0 && <AdvisorCarousel advisors={advisors} />}
+
           {image && (
             <div className="rounded-lg overflow-hidden border border-border">
               <img
