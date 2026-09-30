@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
 import ProfileSidebar from "@/components/ProfileSidebar";
 import PostCreator from "@/components/PostCreator";
+import MarketTicker from "@/components/MarketTicker";
 import FeedPost from "@/components/FeedPost";
 import PromotionalSidebar from "@/components/PromotionalSidebar";
 
@@ -126,39 +127,61 @@ Drop a comment if you want your deck reviewed — I'll pick 3.`,
 
 const marketStreamPosts = [
   {
-    author: {
-      name: "Tomás Rivera",
-      avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Tomas",
-      verified: true,
-    },
-    title: "For Hire: Fractional CTO (Equity + Cash)",
-    timestamp: "Today, 09:40 AM",
-    content: `💼 Available: Fractional CTO for early-stage startups.
+    author: { name: "Upfounder Markets", avatar: "https://api.dicebear.com/7.x/initials/svg?seed=UM", verified: true },
+    title: "Market Open: Tech Leads as NASDAQ Climbs 1.2%",
+    timestamp: "Today, 09:35 AM",
+    content: `📈 US stocks opened higher as chipmakers rallied.
 
-12 years shipping consumer apps. I take on 2 ventures per year — equity + small retainer.
+• NVDA +2.8% on new data-centre orders
+• AAPL +0.9% ahead of product event
+• 10-year Treasury yield eases to 3.78%
 
-Recent: scaled a marketplace from 0 → 80K users in 9 months. DM for a case study.`,
-    likes: 37,
-    comments: 11,
+Watch: Fed minutes release at 2:00 PM ET.`,
+    likes: 84,
+    comments: 22,
   },
   {
-    author: {
-      name: "Aisha Bello",
-      avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Aisha",
-      verified: false,
-    },
-    title: "Selling: Fully-Built Shopify Store with 40K Followers",
-    timestamp: "Yesterday, 06:10 PM",
-    content: `🛒 For sale: profitable Shopify store in the fitness niche.
+    author: { name: "Marcus Lee", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Marcus", verified: true },
+    title: "Earnings Watch: 5 Reports That Could Move This Week",
+    timestamp: "Today, 08:10 AM",
+    content: `🗓️ My earnings calendar for the week:
 
-✅ 40K Instagram followers (included)
-✅ $4.2K/month average revenue
-✅ 3 suppliers under contract
+1. MSFT — cloud growth is the number to watch
+2. TSLA — margins vs. price cuts
+3. AMZN — AWS reacceleration?
+4. META — ad revenue and AI capex
+5. GOOGL — search share vs. AI competitors
 
-Asking $28K. Financials open to serious buyers.`,
-    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=400&fit=crop",
-    likes: 15,
-    comments: 9,
+Which one are you trading?`,
+    likes: 51,
+    comments: 34,
+  },
+  {
+    author: { name: "Nora Patel", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Nora", verified: false },
+    title: "IPO Pipeline: Three Startups Filing to Go Public",
+    timestamp: "Yesterday, 05:45 PM",
+    content: `🚀 The IPO window is reopening. Filed this week:
+
+• A fintech payments platform (~$6B valuation)
+• A design-software company (~$3.5B)
+• A climate-tech battery maker (~$2B)
+
+Founders: public-market appetite for profitable growth is back.`,
+    image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&h=400&fit=crop",
+    likes: 67,
+    comments: 18,
+  },
+  {
+    author: { name: "Daniel Cho", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Daniel", verified: false },
+    title: "Why Founders Should Watch Interest Rates",
+    timestamp: "Yesterday, 11:20 AM",
+    content: `💡 Rate cuts ripple straight into startup funding.
+
+Lower rates → investors chase growth → higher valuations for private companies.
+
+If you're raising in the next 6 months, the market backdrop matters as much as your deck.`,
+    likes: 42,
+    comments: 12,
   },
 ];
 
@@ -166,7 +189,7 @@ const streams = [
   { name: "Main Stream", description: "Everything from your community", posts: mainStreamPosts },
   { name: "News Stream", description: "Headlines and announcements", posts: newsStreamPosts },
   { name: "Learning Stream", description: "Lessons, workshops and guides", posts: learningStreamPosts },
-  { name: "Market Stream", description: "Hire, sell and trade", posts: marketStreamPosts },
+  { name: "Market Stream", description: "Stocks, prices and market moves", posts: marketStreamPosts },
 ];
 
 const Index = () => {
@@ -187,8 +210,8 @@ const Index = () => {
         </div>
 
         <div className="min-w-0 flex-1">
-          <div className="mx-auto flex h-full max-w-6xl gap-6 px-4 sm:px-6">
-          <main className="flex min-h-0 min-w-0 w-full flex-1 flex-col gap-3 lg:max-w-3xl pt-4 sm:pt-6">
+          <div className="flex h-full gap-4 px-4 sm:px-4">
+          <main className="flex min-h-0 min-w-0 w-full flex-1 flex-col gap-3 pt-4 sm:pt-6">
 
             <div className="flex shrink-0 items-center gap-2" aria-label="Streams">
               <div className="flex min-w-0 flex-1 gap-1 overflow-x-auto" role="tablist" aria-label="Streams">
@@ -240,6 +263,7 @@ const Index = () => {
                 touchStart.current = null;
               }}
             >
+              {activeStream === 3 && <MarketTicker />}
               {streams[activeStream].posts.map((post, index) => (
                 <FeedPost key={post.author.name} tone={index % 3 === 0 ? "blue" : index % 3 === 1 ? "yellow" : "lilac"} {...post} />
               ))}
@@ -250,7 +274,7 @@ const Index = () => {
             </div>
           </main>
 
-          <div className="hidden overflow-y-auto pt-6 xl:block">
+          <div className="hidden shrink-0 overflow-y-auto pt-6 xl:block">
             <PromotionalSidebar />
           </div>
           </div>
