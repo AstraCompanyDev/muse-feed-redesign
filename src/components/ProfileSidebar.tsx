@@ -80,7 +80,7 @@ const ProfileSidebar = ({ collapsed = false, onToggle }: ProfileSidebarProps) =>
           title={label}
           aria-label={label}
           className={`relative flex items-center rounded-lg font-medium transition-colors ${
-            collapsed ? "w-11 justify-center py-3" : "w-full gap-4 px-4 py-3 text-[15px]"
+            collapsed ? "w-11 justify-center py-3" : "w-full justify-start gap-4 px-4 py-3 text-[15px]"
           } ${active ? "text-primary" : "text-sidebar-foreground hover:bg-sidebar-accent"}`}
         >
           {active && (
