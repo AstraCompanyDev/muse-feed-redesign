@@ -20,7 +20,7 @@ interface FeedPostProps {
 
 const FeedPost = ({ author, title, timestamp, content, image, likes = 0, comments = 0, tone = "blue" }: FeedPostProps) => {
   return (
-    <Card className={`border-transparent shadow-none transition-colors ${tone === "blue" ? "bg-feed-blue" : tone === "yellow" ? "bg-feed-yellow" : "bg-feed-lilac"}`}>
+    <Card className={`border-border shadow-none transition-colors ${tone === "blue" ? "bg-feed-blue" : tone === "yellow" ? "bg-feed-yellow" : "bg-feed-lilac"}`}>
       <CardContent className="p-4 sm:p-6">
         <div className="flex items-start justify-between mb-4">
           <div className="flex gap-2 sm:gap-3 flex-1 min-w-0">
