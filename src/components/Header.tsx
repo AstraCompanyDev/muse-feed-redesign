@@ -2,6 +2,7 @@ import { Search } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import ThemeToggle from "@/components/ThemeToggle";
 import logoUrl from "@/assets/upfounder-logo.jpeg";
 
 const Header = () => {
@@ -19,17 +20,18 @@ const Header = () => {
             <Input
               type="search"
               placeholder="Search..."
-              className="h-8 w-full bg-input pl-8 text-sm border-border focus-visible:ring-primary"
+              className="h-9 w-full rounded-xl bg-input pl-8 text-sm border-border focus-visible:ring-primary"
             />
           </div>
         </div>
 
         <div className="flex items-center gap-2">
+          <ThemeToggle />
           <Button variant="ghost" className="text-foreground hover:text-primary hidden sm:flex">
             Login
           </Button>
           <Link to="/search">
-            <Button className="bg-primary hover:bg-primary/90 text-primary-foreground font-medium text-sm sm:text-base px-3 sm:px-4">
+            <Button className="rounded-xl bg-gradient-primary hover:opacity-90 text-primary-foreground font-medium text-sm sm:text-base px-3 sm:px-4">
               <span className="hidden sm:inline">Find a CoFounder</span>
               <span className="sm:hidden">Find</span>
             </Button>
