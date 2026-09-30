@@ -3,6 +3,7 @@ import { Heart, MessageCircle, Share2, MoreHorizontal, CheckCircle2, TrendingUp,
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
+import FeedPoll, { type PollData } from "@/components/FeedPoll";
 
 interface StockQuote {
   symbol: string;
@@ -31,6 +32,8 @@ interface FeedPostProps {
   timestamp: string;
   content: string;
   image?: string;
+  imageRows?: { src: string; alt: string }[];
+  poll?: PollData;
   likes?: number;
   comments?: number;
   tone?: "blue" | "yellow" | "lilac";
@@ -114,7 +117,7 @@ const AdvisorCarousel = ({ advisors }: { advisors: Advisor[] }) => {
   );
 };
 
-const FeedPost = ({ author, title, timestamp, content, image, likes = 0, comments = 0, tone = "blue", stock, advisors }: FeedPostProps) => {
+const FeedPost = ({ author, title, timestamp, content, image, imageRows, poll, likes = 0, comments = 0, tone = "blue", stock, advisors }: FeedPostProps) => {
   return (
     <Card className={`border-border shadow-none transition-colors ${tone === "blue" ? "bg-feed-blue" : tone === "yellow" ? "bg-feed-yellow" : "bg-feed-lilac"}`}>
       <CardContent className="p-4 sm:p-6">
@@ -166,6 +169,16 @@ const FeedPost = ({ author, title, timestamp, content, image, likes = 0, comment
           )}
           
           {advisors && advisors.length > 0 && <AdvisorCarousel advisors={advisors} />}
+
+          {poll && <FeedPoll poll={poll} />}
+
+          {imageRows && imageRows.length > 0 && (
+            <div className="grid gap-2" aria-label="Post photos">
+              {imageRows.map((photo) => (
+                <img key={photo.src} src={photo.src} alt={photo.alt} loading="lazy" width={1200} height={640} className="aspect-[15/8] w-full rounded-md border border-border object-cover" />
+              ))}
+            </div>
+          )}
 
           {image && (
             <div className="rounded-lg overflow-hidden border border-border">

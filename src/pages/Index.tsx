@@ -7,8 +7,41 @@ import PostCreator from "@/components/PostCreator";
 import MarketTicker from "@/components/MarketTicker";
 import FeedPost from "@/components/FeedPost";
 import PromotionalSidebar from "@/components/PromotionalSidebar";
+import founderStory01 from "@/assets/founder-story-01.jpg";
+import founderStory02 from "@/assets/founder-story-02.jpg";
+import founderStory03 from "@/assets/founder-story-03.jpg";
 
 const mainStreamPosts = [
+  {
+    author: { name: "Maya Chen", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=MayaChen", verified: true },
+    title: "From Sketch to First Demo",
+    timestamp: "Today, 12:10 PM",
+    content: "Three snapshots from our first product sprint: the idea on a whiteboard, the prototype on paper, and the moment we shared it with our first testers. Still early, but it feels real now.",
+    imageRows: [
+      { src: founderStory01, alt: "Founders planning product ideas at a whiteboard" },
+      { src: founderStory02, alt: "The team sketching an early product prototype" },
+      { src: founderStory03, alt: "Founders sharing their first demo with testers" },
+    ],
+    likes: 38,
+    comments: 12,
+  },
+  {
+    author: { name: "Upfounder Community", avatar: "https://api.dicebear.com/7.x/initials/svg?seed=UC", verified: true },
+    title: "Founder Poll",
+    timestamp: "Today, 11:25 AM",
+    content: "Every team starts somewhere. What would help your startup most right now?",
+    poll: {
+      question: "What is your biggest priority this month?",
+      options: [
+        { label: "Finding a co-founder", votes: 42 },
+        { label: "Getting first customers", votes: 68 },
+        { label: "Raising funding", votes: 31 },
+        { label: "Building the product", votes: 55 },
+      ],
+    },
+    likes: 16,
+    comments: 24,
+  },
   {
     author: {
       name: "Sarah Martinez",
@@ -132,9 +165,25 @@ To all founders grinding: keep going!`,
       },
     ],
   },
+  {
+    author: { name: "Alex Rivera", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=AlexRivera", verified: false },
+    title: "Looking for a Design Partner",
+    timestamp: "Yesterday, 06:10 PM",
+    content: "Building a simple workflow tool for independent studios. We have a clickable prototype and are looking for two or three teams to try it with us. If you manage client projects, I'd love to hear what your current process looks like.",
+    likes: 29,
+    comments: 11,
+  },
 ];
 
 const newsStreamPosts = [
+  {
+    author: { name: "Upfounder News", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=UpfounderNews", verified: true },
+    title: "Community Briefing: What Founders Are Watching",
+    timestamp: "Today, 09:40 AM",
+    content: "This week's conversations across the community: early customer discovery, leaner launch plans, and how founders are deciding when to hire. Which topic should we cover in depth next?",
+    likes: 35,
+    comments: 17,
+  },
   {
     author: {
       name: "Upfounder News",
@@ -168,9 +217,33 @@ Deadline is in 3 weeks. Happy to share my winning application from last cycle if
     likes: 88,
     comments: 22,
   },
+  {
+    author: { name: "Noah Ellis", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=NoahEllis", verified: false },
+    title: "Founder Event Roundup",
+    timestamp: "Yesterday, 01:15 PM",
+    content: "I've been collecting founder meetups and pitch nights happening this season. What local events have actually led to useful connections for you? Drop your favourites in the comments so others can find them.",
+    likes: 27,
+    comments: 14,
+  },
+  {
+    author: { name: "Amira Bello", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=AmiraBello", verified: true },
+    title: "A New Accelerator Cohort to Follow",
+    timestamp: "Monday, 03:30 PM",
+    content: "A new group of early-stage teams is starting its accelerator journey. I'm most curious to see how they test demand before scaling. Have you been through an accelerator? What surprised you?",
+    likes: 48,
+    comments: 9,
+  },
 ];
 
 const learningStreamPosts = [
+  {
+    author: { name: "Leah Brooks", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=LeahBrooks", verified: true },
+    title: "A Simple Customer Interview Framework",
+    timestamp: "Today, 12:00 PM",
+    content: "Three questions I ask before pitching anything:\n\n1. What was the last time this problem came up?\n2. How did you deal with it?\n3. What did that cost you in time or money?\n\nAsk for a real story, not a prediction. You'll learn far more.",
+    likes: 74,
+    comments: 13,
+  },
   {
     author: {
       name: "James Okafor",
@@ -206,6 +279,22 @@ Drop a comment if you want your deck reviewed — I'll pick 3.`,
     image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=800&h=400&fit=crop",
     likes: 56,
     comments: 31,
+  },
+  {
+    author: { name: "Samira Khan", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=SamiraKhan", verified: false },
+    title: "The One-Page Pricing Exercise",
+    timestamp: "Monday, 10:20 AM",
+    content: "Before you build a pricing page, write down who buys, what outcome they pay for, and the alternative they're comparing you to. Then talk to five potential buyers about those assumptions. Pricing starts with understanding value, not picking a number.",
+    likes: 62,
+    comments: 18,
+  },
+  {
+    author: { name: "Theo Martin", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=TheoMartin", verified: true },
+    title: "How We Run a Weekly Product Review",
+    timestamp: "Sunday, 04:50 PM",
+    content: "Our 30-minute review has just three parts: what customers tried, where they got stuck, and the one thing we will change next. Keeping it small helps us ship improvements instead of debating a giant roadmap.",
+    likes: 43,
+    comments: 7,
   },
 ];
 
@@ -275,6 +364,23 @@ Lower rates → investors chase growth → higher valuations for private compani
 If you're raising in the next 6 months, the market backdrop matters as much as your deck.`,
     likes: 42,
     comments: 12,
+  },
+  {
+    author: { name: "Upfounder Markets", avatar: "https://api.dicebear.com/7.x/initials/svg?seed=UM", verified: true },
+    title: "Stock Watch: AAPL",
+    timestamp: "Yesterday, 09:40 AM",
+    content: "A second stock snapshot for the community to discuss. Product announcements and services growth are two themes investors often watch when considering Apple's next quarter.",
+    stock: { symbol: "AAPL", name: "Apple Inc.", price: 226.84, change: -0.64 },
+    likes: 33,
+    comments: 14,
+  },
+  {
+    author: { name: "Iris Wong", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=IrisWong", verified: true },
+    title: "Market Notes: What a Red Day Can Tell You",
+    timestamp: "Monday, 01:20 PM",
+    content: "When a stock drops, I try to separate company news from a broader market move. A single day's change rarely tells the whole story. What do you check first before drawing a conclusion?",
+    likes: 59,
+    comments: 20,
   },
 ];
 
