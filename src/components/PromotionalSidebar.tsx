@@ -8,18 +8,15 @@ const PromotionalSidebar = () => {
       {/* Welcome Card */}
       <Card className="border-border bg-secondary overflow-hidden">
         <CardContent className="p-6">
-          <div className="flex items-center gap-2 mb-3">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
-              <span className="text-lg font-bold text-primary-foreground">C</span>
-            </div>
-            <span className="text-lg font-bold text-foreground">CoFoundersLab</span>
+          <div className="flex items-center mb-3">
+            <img src={logo.url} alt="Upfounder" className="h-8 w-auto" />
           </div>
           <h3 className="text-2xl font-bold text-foreground mb-2">
             Welcome
             <br />
             <span className="text-primary">TO THE NEW</span>
             <br />
-            <span className="text-primary">COFOUNDERSLAB</span>
+            <span className="text-primary">UPFOUNDER</span>
           </h3>
           <p className="text-foreground font-semibold text-lg mb-4">
             FIND YOUR COFOUNDER TODAY
