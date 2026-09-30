@@ -26,7 +26,7 @@ interface FeedPostProps {
   stock?: StockQuote;
 }
 
-const FeedPost = ({ author, title, timestamp, content, image, likes = 0, comments = 0, tone = "blue" }: FeedPostProps) => {
+const FeedPost = ({ author, title, timestamp, content, image, likes = 0, comments = 0, tone = "blue", stock }: FeedPostProps) => {
   return (
     <Card className={`border-border shadow-none transition-colors ${tone === "blue" ? "bg-feed-blue" : tone === "yellow" ? "bg-feed-yellow" : "bg-feed-lilac"}`}>
       <CardContent className="p-4 sm:p-6">
