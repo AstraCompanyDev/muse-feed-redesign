@@ -119,8 +119,27 @@ const AdvisorCarousel = ({ advisors }: { advisors: Advisor[] }) => {
 };
 
 const FeedPost = ({ author, title, timestamp, content, image, imageRows, poll, likes = 0, comments = 0, tone = "blue", stock, advisors }: FeedPostProps) => {
+  const [open, setOpen] = useState(false);
+  const [activePhoto, setActivePhoto] = useState(0);
+
+  const photos = [
+    ...(imageRows ?? []),
+    ...(image ? [{ src: image, alt: "Post content" }] : []),
+  ];
+
+  const openPost = (photoIndex = 0) => {
+    setActivePhoto(photoIndex);
+    setOpen(true);
+  };
+
+  const stepPhoto = (direction: 1 | -1) => {
+    if (photos.length < 2) return;
+    setActivePhoto((i) => (i + direction + photos.length) % photos.length);
+  };
+
   return (
-    <Card className={`border-border shadow-none transition-colors ${tone === "blue" ? "bg-feed-blue" : tone === "yellow" ? "bg-feed-yellow" : "bg-feed-lilac"}`}>
+    <>
+    <Card className={`border-border shadow-none transition-colors hover:border-primary/40 ${tone === "blue" ? "bg-feed-blue" : tone === "yellow" ? "bg-feed-yellow" : "bg-feed-lilac"}`}>
       <CardContent className="p-4 sm:p-6">
         <div className="flex items-start justify-between mb-4">
           <div className="flex gap-2 sm:gap-3 flex-1 min-w-0">
