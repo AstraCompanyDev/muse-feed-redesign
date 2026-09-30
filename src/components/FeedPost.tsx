@@ -55,7 +55,27 @@ const FeedPost = ({ author, title, timestamp, content, image, likes = 0, comment
         </div>
 
         <div className="space-y-4">
-          <p className="text-sm sm:text-base text-foreground leading-relaxed whitespace-pre-line">{content}</p>
+          {stock ? (
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
+              <div className="shrink-0 rounded-xl border border-border bg-background p-4 sm:w-52">
+                <div className="flex items-center justify-between">
+                  <span className="text-base font-bold text-foreground">{stock.symbol}</span>
+                  <span className={`flex items-center gap-1 text-sm font-semibold tabular-nums ${stock.change >= 0 ? "text-emerald-500" : "text-destructive"}`}>
+                    {stock.change >= 0 ? <TrendingUp className="h-4 w-4" /> : <TrendingDown className="h-4 w-4" />}
+                    {stock.change >= 0 ? "+" : ""}
+                    {stock.change.toFixed(2)}%
+                  </span>
+                </div>
+                <div className="mt-1 text-2xl font-bold tabular-nums text-foreground">
+                  ${stock.price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                </div>
+                <div className="mt-0.5 text-xs text-muted-foreground">{stock.name} · Today</div>
+              </div>
+              <p className="min-w-0 flex-1 text-sm sm:text-base text-foreground leading-relaxed">{content}</p>
+            </div>
+          ) : (
+            <p className="text-sm sm:text-base text-foreground leading-relaxed whitespace-pre-line">{content}</p>
+          )}
           
           {image && (
             <div className="rounded-lg overflow-hidden border border-border">
