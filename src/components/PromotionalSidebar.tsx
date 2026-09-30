@@ -6,32 +6,32 @@ const PromotionalSidebar = () => {
   return (
     <aside className="w-full xl:w-80 space-y-4">
       {/* Welcome Card */}
-      <Card className="border-border bg-gradient-to-br from-accent to-accent/80 overflow-hidden">
+      <Card className="border-border bg-secondary overflow-hidden">
         <CardContent className="p-6">
           <div className="flex items-center gap-2 mb-3">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/90">
-              <span className="text-lg font-bold text-accent">C</span>
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
+              <span className="text-lg font-bold text-primary-foreground">C</span>
             </div>
-            <span className="text-lg font-bold text-white">CoFoundersLab</span>
+            <span className="text-lg font-bold text-foreground">CoFoundersLab</span>
           </div>
-          <h3 className="text-2xl font-bold text-white mb-2">
+          <h3 className="text-2xl font-bold text-foreground mb-2">
             Welcome
             <br />
             <span className="text-primary">TO THE NEW</span>
             <br />
             <span className="text-primary">COFOUNDERSLAB</span>
           </h3>
-          <p className="text-white font-semibold text-lg mb-4">
+          <p className="text-foreground font-semibold text-lg mb-4">
             FIND YOUR COFOUNDER TODAY
           </p>
-          <div className="bg-white/90 rounded-lg p-4">
+          <div className="bg-card rounded-lg p-4">
             <img
               src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400&h=250&fit=crop"
               alt="Team collaboration"
               className="w-full h-auto rounded"
             />
           </div>
-          <p className="text-xs text-white/80 text-center mt-3">
+          <p className="text-xs text-muted-foreground text-center mt-3">
             www.cofounderslab.com
           </p>
         </CardContent>

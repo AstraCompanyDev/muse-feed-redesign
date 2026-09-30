@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 
 const Header = () => {
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky top-0 z-50 w-full border-b border-border bg-card">
       <div className="container flex h-16 items-center gap-2 sm:gap-4 px-4">
         <Link to="/" className="flex items-center gap-2">
           <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary">
@@ -30,7 +30,7 @@ const Header = () => {
             Login
           </Button>
           <Link to="/search">
-            <Button className="bg-accent hover:bg-accent/90 text-accent-foreground font-medium text-sm sm:text-base px-3 sm:px-4">
+            <Button className="bg-primary hover:bg-primary/90 text-primary-foreground font-medium text-sm sm:text-base px-3 sm:px-4">
               <span className="hidden sm:inline">Find a CoFounder</span>
               <span className="sm:hidden">Find</span>
             </Button>
