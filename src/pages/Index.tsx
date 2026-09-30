@@ -426,13 +426,13 @@ const Index = () => {
     <div className="h-dvh overflow-hidden bg-background">
       <Header />
       
-      <div className="flex h-[calc(100dvh-4rem)] w-full">
+      <div className="flex h-[calc(100dvh-4rem)] w-full px-4 sm:px-8">
         <div className="hidden h-full shrink-0 lg:block">
           <ProfileSidebar collapsed={sidebarCollapsed} onToggle={() => setSidebarCollapsed((value) => !value)} />
         </div>
 
         <div className="min-w-0 flex-1">
-          <div className="flex h-full gap-4 px-4 sm:px-4">
+          <div className="flex h-full gap-4">
           <main className="flex min-h-0 min-w-0 w-full flex-1 flex-col gap-3 pt-4 sm:pt-6">
 
             <div className="flex shrink-0 items-center gap-2" aria-label="Streams">
