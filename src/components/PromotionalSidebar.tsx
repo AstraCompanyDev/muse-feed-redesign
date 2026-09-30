@@ -1,7 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import logo from "@/assets/upfounder-logo.jpeg";
+import logoUrl from "@/assets/upfounder-logo.jpeg";
 
 const PromotionalSidebar = () => {
   return (
