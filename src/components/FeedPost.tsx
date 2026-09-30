@@ -165,6 +165,8 @@ const FeedPost = ({ author, title, timestamp, content, image, likes = 0, comment
             <p className="text-sm sm:text-base text-foreground leading-relaxed whitespace-pre-line">{content}</p>
           )}
           
+          {advisors && advisors.length > 0 && <AdvisorCarousel advisors={advisors} />}
+
           {image && (
             <div className="rounded-lg overflow-hidden border border-border">
               <img
