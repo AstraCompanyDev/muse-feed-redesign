@@ -1,8 +1,9 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Heart, MessageCircle, Share2, MoreHorizontal, CheckCircle2, TrendingUp, TrendingDown, ChevronLeft, ChevronRight, Star } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import FeedPoll, { type PollData } from "@/components/FeedPoll";
 
 interface StockQuote {
@@ -118,8 +119,27 @@ const AdvisorCarousel = ({ advisors }: { advisors: Advisor[] }) => {
 };
 
 const FeedPost = ({ author, title, timestamp, content, image, imageRows, poll, likes = 0, comments = 0, tone = "blue", stock, advisors }: FeedPostProps) => {
+  const [open, setOpen] = useState(false);
+  const [activePhoto, setActivePhoto] = useState(0);
+
+  const photos = [
+    ...(imageRows ?? []),
+    ...(image ? [{ src: image, alt: "Post content" }] : []),
+  ];
+
+  const openPost = (photoIndex = 0) => {
+    setActivePhoto(photoIndex);
+    setOpen(true);
+  };
+
+  const stepPhoto = (direction: 1 | -1) => {
+    if (photos.length < 2) return;
+    setActivePhoto((i) => (i + direction + photos.length) % photos.length);
+  };
+
   return (
-    <Card className={`border-border shadow-none transition-colors ${tone === "blue" ? "bg-feed-blue" : tone === "yellow" ? "bg-feed-yellow" : "bg-feed-lilac"}`}>
+    <>
+    <Card className={`border-border shadow-none transition-colors hover:border-primary/40 ${tone === "blue" ? "bg-feed-blue" : tone === "yellow" ? "bg-feed-yellow" : "bg-feed-lilac"}`}>
       <CardContent className="p-4 sm:p-6">
         <div className="flex items-start justify-between mb-4">
           <div className="flex gap-2 sm:gap-3 flex-1 min-w-0">
@@ -162,10 +182,10 @@ const FeedPost = ({ author, title, timestamp, content, image, imageRows, poll, l
                 </div>
                 <div className="mt-0.5 text-xs text-muted-foreground">{stock.name} · Today</div>
               </div>
-              <p className="min-w-0 flex-1 text-sm sm:text-base text-foreground leading-relaxed">{content}</p>
+              <p role="button" tabIndex={0} onClick={() => openPost()} onKeyDown={(e) => e.key === "Enter" && openPost()} className="min-w-0 flex-1 cursor-pointer text-sm sm:text-base text-foreground leading-relaxed">{content}</p>
             </div>
           ) : advisors && advisors.length > 0 ? null : (
-            <p className="text-sm sm:text-base text-foreground leading-relaxed whitespace-pre-line">{content}</p>
+            <p role="button" tabIndex={0} onClick={() => openPost()} onKeyDown={(e) => e.key === "Enter" && openPost()} className="cursor-pointer text-sm sm:text-base text-foreground leading-relaxed whitespace-pre-line">{content}</p>
           )}
           
           {advisors && advisors.length > 0 && <AdvisorCarousel advisors={advisors} />}
@@ -174,20 +194,22 @@ const FeedPost = ({ author, title, timestamp, content, image, imageRows, poll, l
 
           {imageRows && imageRows.length > 0 && (
             <div className="grid grid-cols-3 gap-2" aria-label="Post photos">
-              {imageRows.map((photo) => (
-                <img key={photo.src} src={photo.src} alt={photo.alt} loading="lazy" width={640} height={640} className="aspect-square w-full rounded-md border border-border object-cover" />
+              {imageRows.map((photo, index) => (
+                <button key={photo.src} type="button" onClick={() => openPost(index)} aria-label={`Open ${photo.alt}`} className="group overflow-hidden rounded-md border border-border">
+                  <img src={photo.src} alt={photo.alt} loading="lazy" width={640} height={640} className="aspect-square w-full object-cover transition-transform duration-200 group-hover:scale-105" />
+                </button>
               ))}
             </div>
           )}
 
           {image && (
-            <div className="rounded-lg overflow-hidden border border-border">
+            <button type="button" onClick={() => openPost(imageRows?.length ?? 0)} aria-label="Open post image" className="block w-full overflow-hidden rounded-lg border border-border">
               <img
                 src={image}
                 alt="Post content"
-                className="w-full h-auto object-cover"
+                className="w-full h-auto object-cover transition-transform duration-200 hover:scale-[1.02]"
               />
-            </div>
+            </button>
           )}
 
           <div className="flex items-center gap-2 sm:gap-4 pt-4 border-t border-border">
@@ -209,6 +231,77 @@ const FeedPost = ({ author, title, timestamp, content, image, imageRows, poll, l
         </div>
       </CardContent>
     </Card>
+
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogContent className="max-h-[90vh] max-w-3xl overflow-y-auto">
+        <DialogHeader>
+          <div className="flex items-center gap-3 text-left">
+            <Avatar className="h-10 w-10 shrink-0">
+              <AvatarImage src={author.avatar} />
+              <AvatarFallback className="bg-primary text-primary-foreground">{author.name.charAt(0)}</AvatarFallback>
+            </Avatar>
+            <div className="min-w-0">
+              <DialogTitle className="flex items-center gap-2 text-base">
+                <span className="truncate">{author.name}</span>
+                {author.verified && <CheckCircle2 className="h-4 w-4 shrink-0 fill-primary text-primary" />}
+              </DialogTitle>
+              <DialogDescription className="truncate">{title} · {timestamp}</DialogDescription>
+            </div>
+          </div>
+        </DialogHeader>
+
+        {photos.length > 0 && (
+          <div className="relative">
+            <img
+              src={photos[activePhoto].src}
+              alt={photos[activePhoto].alt}
+              className="max-h-[60vh] w-full rounded-lg border border-border object-contain"
+            />
+            {photos.length > 1 && (
+              <>
+                <Button variant="outline" size="icon" aria-label="Previous image" onClick={() => stepPhoto(-1)} className="absolute left-2 top-1/2 h-9 w-9 -translate-y-1/2 rounded-full bg-card">
+                  <ChevronLeft className="h-4 w-4" />
+                </Button>
+                <Button variant="outline" size="icon" aria-label="Next image" onClick={() => stepPhoto(1)} className="absolute right-2 top-1/2 h-9 w-9 -translate-y-1/2 rounded-full bg-card">
+                  <ChevronRight className="h-4 w-4" />
+                </Button>
+                <div className="mt-2 text-center text-xs text-muted-foreground">
+                  {activePhoto + 1} / {photos.length}
+                </div>
+              </>
+            )}
+          </div>
+        )}
+
+        {stock && (
+          <div className="rounded-xl border border-border bg-background p-4">
+            <div className="flex items-center justify-between">
+              <span className="text-base font-bold text-foreground">{stock.symbol}</span>
+              <span className={`flex items-center gap-1 text-sm font-semibold tabular-nums ${stock.change >= 0 ? "text-emerald-500" : "text-destructive"}`}>
+                {stock.change >= 0 ? <TrendingUp className="h-4 w-4" /> : <TrendingDown className="h-4 w-4" />}
+                {stock.change >= 0 ? "+" : ""}
+                {stock.change.toFixed(2)}%
+              </span>
+            </div>
+            <div className="mt-1 text-2xl font-bold tabular-nums text-foreground">
+              ${stock.price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+            </div>
+            <div className="mt-0.5 text-xs text-muted-foreground">{stock.name} · Today</div>
+          </div>
+        )}
+
+        <p className="whitespace-pre-line text-sm leading-relaxed text-foreground">{content}</p>
+
+        {poll && <FeedPoll poll={poll} />}
+
+        <div className="flex items-center gap-4 border-t border-border pt-4 text-sm text-muted-foreground">
+          <span className="flex items-center gap-1.5"><Heart className="h-4 w-4" />{likes}</span>
+          <span className="flex items-center gap-1.5"><MessageCircle className="h-4 w-4" />{comments}</span>
+          <span className="flex items-center gap-1.5"><Share2 className="h-4 w-4" />Share</span>
+        </div>
+      </DialogContent>
+    </Dialog>
+    </>
   );
 };
 
