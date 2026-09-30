@@ -194,20 +194,22 @@ const FeedPost = ({ author, title, timestamp, content, image, imageRows, poll, l
 
           {imageRows && imageRows.length > 0 && (
             <div className="grid grid-cols-3 gap-2" aria-label="Post photos">
-              {imageRows.map((photo) => (
-                <img key={photo.src} src={photo.src} alt={photo.alt} loading="lazy" width={640} height={640} className="aspect-square w-full rounded-md border border-border object-cover" />
+              {imageRows.map((photo, index) => (
+                <button key={photo.src} type="button" onClick={() => openPost(index)} aria-label={`Open ${photo.alt}`} className="group overflow-hidden rounded-md border border-border">
+                  <img src={photo.src} alt={photo.alt} loading="lazy" width={640} height={640} className="aspect-square w-full object-cover transition-transform duration-200 group-hover:scale-105" />
+                </button>
               ))}
             </div>
           )}
 
           {image && (
-            <div className="rounded-lg overflow-hidden border border-border">
+            <button type="button" onClick={() => openPost(imageRows?.length ?? 0)} aria-label="Open post image" className="block w-full overflow-hidden rounded-lg border border-border">
               <img
                 src={image}
                 alt="Post content"
-                className="w-full h-auto object-cover"
+                className="w-full h-auto object-cover transition-transform duration-200 hover:scale-[1.02]"
               />
-            </div>
+            </button>
           )}
 
           <div className="flex items-center gap-2 sm:gap-4 pt-4 border-t border-border">
