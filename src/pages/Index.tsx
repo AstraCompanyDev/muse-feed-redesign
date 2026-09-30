@@ -178,7 +178,7 @@ const Index = () => {
   };
 
   return (
-    <div className="h-dvh overflow-hidden bg-background bg-gradient-page">
+    <div className="h-dvh overflow-hidden bg-background">
       <Header />
       
       <div className="flex h-[calc(100dvh-4rem)] w-full">
