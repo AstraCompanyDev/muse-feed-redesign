@@ -1,4 +1,5 @@
-import { RefreshCw } from "lucide-react";
+import { useRef, useState } from "react";
+import { ChevronLeft, ChevronRight, RefreshCw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
 import ProfileSidebar from "@/components/ProfileSidebar";
@@ -6,8 +7,7 @@ import PostCreator from "@/components/PostCreator";
 import FeedPost from "@/components/FeedPost";
 import PromotionalSidebar from "@/components/PromotionalSidebar";
 
-const Index = () => {
-  const posts = [
+const posts = [
     {
       author: {
         name: "Ell Falah",
@@ -74,7 +74,21 @@ To all founders grinding: keep going! The journey is tough but worth it.
       likes: 67,
       comments: 15,
     },
-  ];
+];
+
+const feeds = [
+  { name: "For You", description: "From your community", posts },
+  { name: "Co-founder Opportunities", description: "People looking to build together", posts: [posts[0], posts[1]] },
+  { name: "Founder Updates", description: "Progress from the community", posts: [posts[2]] },
+];
+
+const Index = () => {
+  const [activeFeed, setActiveFeed] = useState(0);
+  const touchStart = useRef<{ x: number; y: number } | null>(null);
+
+  const selectFeed = (index: number) => {
+    setActiveFeed(Math.max(0, Math.min(feeds.length - 1, index)));
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -86,19 +100,72 @@ To all founders grinding: keep going! The journey is tough but worth it.
             <ProfileSidebar />
           </div>
           
-          <main className="flex-1 w-full lg:max-w-2xl space-y-4">
-            <div className="flex justify-end mb-4">
-              <Button variant="outline" size="sm" className="gap-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground">
+          <main className="flex-1 min-w-0 w-full lg:max-w-2xl space-y-4">
+            <div className="flex items-center justify-between gap-3">
+              <div className="min-w-0">
+                <h1 className="text-xl font-semibold text-foreground">Your feed</h1>
+                <p className="text-sm text-muted-foreground">{feeds[activeFeed].description}</p>
+              </div>
+              <Button variant="outline" size="icon" aria-label="Refresh feed" title="Refresh feed" className="shrink-0 border-primary text-primary hover:bg-primary hover:text-primary-foreground" onClick={() => selectFeed(0)}>
                 <RefreshCw className="h-4 w-4" />
-                <span className="hidden sm:inline">Refresh</span>
               </Button>
             </div>
 
-            <PostCreator />
+            <div className="flex items-center gap-2 border-b border-border" aria-label="Feeds">
+              <div className="flex min-w-0 flex-1 overflow-x-auto" role="tablist" aria-label="Feeds">
+                {feeds.map((feed, index) => (
+                  <Button
+                    key={feed.name}
+                    id={`feed-tab-${index}`}
+                    role="tab"
+                    aria-selected={activeFeed === index}
+                    aria-controls="feed-panel"
+                    variant="ghost"
+                    onClick={() => selectFeed(index)}
+                    className={`h-12 shrink-0 rounded-none border-b-2 px-4 text-sm font-medium transition-colors ${activeFeed === index ? "border-primary text-primary" : "border-transparent text-muted-foreground hover:text-foreground"}`}
+                  >
+                    {feed.name}
+                  </Button>
+                ))}
+              </div>
+              <div className="flex shrink-0 gap-1 pb-1">
+                <Button variant="ghost" size="icon" aria-label="Previous feed" title="Previous feed" disabled={activeFeed === 0} onClick={() => selectFeed(activeFeed - 1)}>
+                  <ChevronLeft className="h-4 w-4" />
+                </Button>
+                <Button variant="ghost" size="icon" aria-label="Next feed" title="Next feed" disabled={activeFeed === feeds.length - 1} onClick={() => selectFeed(activeFeed + 1)}>
+                  <ChevronRight className="h-4 w-4" />
+                </Button>
+              </div>
+            </div>
 
-            {posts.map((post, index) => (
-              <FeedPost key={index} {...post} />
-            ))}
+            <div
+              id="feed-panel"
+              role="tabpanel"
+              aria-labelledby={`feed-tab-${activeFeed}`}
+              className="space-y-4 touch-pan-y"
+              onTouchStart={(event) => {
+                const touch = event.touches[0];
+                touchStart.current = { x: touch.clientX, y: touch.clientY };
+              }}
+              onTouchEnd={(event) => {
+                if (!touchStart.current) return;
+                const touch = event.changedTouches[0];
+                const dx = touch.clientX - touchStart.current.x;
+                const dy = touch.clientY - touchStart.current.y;
+                if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+                  selectFeed(activeFeed + (dx < 0 ? 1 : -1));
+                }
+                touchStart.current = null;
+              }}
+            >
+              {feeds[activeFeed].posts.map((post) => (
+                <FeedPost key={post.author.name} {...post} />
+              ))}
+            </div>
+
+            <div className="pt-4" aria-label="Create a post">
+              <PostCreator />
+            </div>
           </main>
 
           <div className="hidden xl:block">
