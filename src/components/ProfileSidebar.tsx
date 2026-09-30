@@ -1,6 +1,7 @@
 import { Home, Compass, UserPlus, UserSearch, Eye, Users, CalendarDays, Network, PanelLeftClose, PanelLeftOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useNavigate } from "react-router-dom";
 
 const nav = [
   { label: "Home", icon: Home, active: true },
@@ -9,8 +10,8 @@ const nav = [
   { label: "Find an Advisor", icon: UserSearch },
   { label: "Who viewed your profile", icon: Eye },
   { label: "Connections", icon: Users },
-  { label: "Meetings", icon: CalendarDays },
-  { label: "Network", icon: Network },
+  { label: "Meetings", icon: CalendarDays, to: "/meetings" },
+  { label: "Network", icon: Network, to: "/network" },
 ];
 
 interface ProfileSidebarProps {
@@ -18,7 +19,9 @@ interface ProfileSidebarProps {
   onToggle?: () => void;
 }
 
-const ProfileSidebar = ({ collapsed = false, onToggle }: ProfileSidebarProps) => (
+const ProfileSidebar = ({ collapsed = false, onToggle }: ProfileSidebarProps) => {
+  const navigate = useNavigate();
+  return (
   <aside
     className={`flex h-full flex-col overflow-y-auto overflow-x-hidden border-r border-sidebar-border bg-sidebar py-6 text-sidebar-foreground transition-[width] duration-200 ease-in-out ${
       collapsed ? "w-16 items-center px-2" : "w-64 pr-5 xl:w-72"
@@ -69,9 +72,11 @@ const ProfileSidebar = ({ collapsed = false, onToggle }: ProfileSidebarProps) =>
     )}
 
     <nav className={`flex w-full flex-1 flex-col gap-1 ${collapsed ? "items-center" : ""}`}>
-      {nav.map(({ label, icon: Icon, active }) => (
-        <button
+      {nav.map(({ label, icon: Icon, active, to }) => (
+        <Button
           key={label}
+          variant="ghost"
+          onClick={to ? () => navigate(to) : undefined}
           title={label}
           aria-label={label}
           className={`relative flex items-center rounded-lg font-medium transition-colors ${
@@ -85,7 +90,7 @@ const ProfileSidebar = ({ collapsed = false, onToggle }: ProfileSidebarProps) =>
           )}
           <Icon className="h-5 w-5 shrink-0" />
           {!collapsed && label}
-        </button>
+        </Button>
       ))}
     </nav>
 
@@ -96,6 +101,7 @@ const ProfileSidebar = ({ collapsed = false, onToggle }: ProfileSidebarProps) =>
             size="icon"
             title="Manage Your Meetings"
             aria-label="Manage Your Meetings"
+            onClick={() => navigate("/meetings")}
             className="h-11 w-11 rounded-xl bg-gradient-primary text-primary-foreground hover:opacity-90"
           >
             <CalendarDays className="h-5 w-5" />
@@ -105,6 +111,7 @@ const ProfileSidebar = ({ collapsed = false, onToggle }: ProfileSidebarProps) =>
             size="icon"
             title="Manage Your Network"
             aria-label="Manage Your Network"
+            onClick={() => navigate("/network")}
             className="h-11 w-11 rounded-xl border-primary/60 bg-transparent text-foreground hover:bg-sidebar-accent"
           >
             <Network className="h-5 w-5" />
@@ -112,12 +119,13 @@ const ProfileSidebar = ({ collapsed = false, onToggle }: ProfileSidebarProps) =>
         </>
       ) : (
         <>
-          <Button className="h-12 w-full rounded-xl bg-gradient-primary text-primary-foreground hover:opacity-90">Manage Your Meetings</Button>
-          <Button variant="outline" className="h-12 w-full rounded-xl border-primary/60 bg-transparent text-foreground hover:bg-sidebar-accent">Manage Your Network</Button>
+          <Button onClick={() => navigate("/meetings")} className="h-12 w-full rounded-xl bg-gradient-primary text-primary-foreground hover:opacity-90">Manage Your Meetings</Button>
+          <Button onClick={() => navigate("/network")} variant="outline" className="h-12 w-full rounded-xl border-primary/60 bg-transparent text-foreground hover:bg-sidebar-accent">Manage Your Network</Button>
         </>
       )}
     </div>
   </aside>
-);
+  );
+};
 
 export default ProfileSidebar;
