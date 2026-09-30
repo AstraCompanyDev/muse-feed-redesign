@@ -188,11 +188,6 @@ const Index = () => {
           </div>
           
           <main className="flex min-h-0 min-w-0 w-full flex-1 flex-col gap-3 lg:max-w-2xl">
-            <div className="flex items-center justify-end gap-3">
-              <Button variant="outline" size="icon" aria-label="Refresh stream" title="Refresh stream" className="shrink-0 border-primary text-primary hover:bg-primary hover:text-primary-foreground" onClick={() => selectStream(0)}>
-                <RefreshCw className="h-4 w-4" />
-              </Button>
-            </div>
 
             <div className="flex shrink-0 items-center gap-2 border-b border-border" aria-label="Streams">
               <div className="flex min-w-0 flex-1 overflow-x-auto" role="tablist" aria-label="Streams">
@@ -214,6 +209,9 @@ const Index = () => {
               <div className="flex shrink-0 gap-1 pb-1">
                 <Button variant="ghost" size="icon" aria-label="Previous stream" title="Previous stream" disabled={activeStream === 0} onClick={() => selectStream(activeStream - 1)}>
                   <ChevronLeft className="h-4 w-4" />
+                </Button>
+                <Button variant="ghost" size="icon" aria-label="Refresh stream" title="Refresh stream" className="text-primary hover:bg-primary hover:text-primary-foreground" onClick={() => selectStream(0)}>
+                  <RefreshCw className="h-4 w-4" />
                 </Button>
                 <Button variant="ghost" size="icon" aria-label="Next stream" title="Next stream" disabled={activeStream === streams.length - 1} onClick={() => selectStream(activeStream + 1)}>
                   <ChevronRight className="h-4 w-4" />
