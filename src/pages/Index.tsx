@@ -203,6 +203,7 @@ const streams = [
 
 const Index = () => {
   const [activeStream, setActiveStream] = useState(0);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const touchStart = useRef<{ x: number; y: number } | null>(null);
 
   const selectStream = (index: number) => {
@@ -215,7 +216,7 @@ const Index = () => {
       
       <div className="flex h-[calc(100dvh-4rem)] w-full">
         <div className="hidden h-full shrink-0 lg:block">
-          <ProfileSidebar />
+          <ProfileSidebar collapsed={sidebarCollapsed} onToggle={() => setSidebarCollapsed((value) => !value)} />
         </div>
 
         <div className="min-w-0 flex-1">
