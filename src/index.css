@@ -17,39 +17,39 @@ All colors MUST be HSL.
     --popover: 0 0% 100%;
     --popover-foreground: 226 22% 17%;
 
-    --primary: 257 73% 53%;
+    --primary: 217 91% 52%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 247 100% 96%;
+    --secondary: 214 100% 96%;
     --secondary-foreground: 226 22% 17%;
 
     --muted: 225 38% 96%;
     --muted-foreground: 222 12% 43%;
 
-    --accent: 248 92% 96%;
-    --accent-foreground: 257 73% 43%;
+    --accent: 214 95% 96%;
+    --accent-foreground: 217 91% 42%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
     --border: 225 31% 88%;
     --input: 225 38% 96%;
-    --ring: 257 73% 53%;
+    --ring: 217 91% 52%;
 
     --radius: 0.5rem;
 
-    --card-highlight: 247 100% 96%;
+    --card-highlight: 214 100% 96%;
     --feed-blue: 217 100% 95%;
     --feed-yellow: 43 100% 93%;
-    --feed-lilac: 255 100% 96%;
+    --feed-lilac: 187 95% 95%;
     --sidebar-background: 0 0% 100%;
     --sidebar-foreground: 226 22% 17%;
-    --sidebar-primary: 257 73% 53%;
+    --sidebar-primary: 217 91% 52%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 247 100% 96%;
+    --sidebar-accent: 214 100% 96%;
     --sidebar-accent-foreground: 226 22% 17%;
     --sidebar-border: 225 31% 88%;
-    --sidebar-ring: 257 73% 53%;
+    --sidebar-ring: 217 91% 52%;
   }
 
   .dark {
@@ -62,36 +62,36 @@ All colors MUST be HSL.
     --popover: 0 0% 100%;
     --popover-foreground: 226 22% 17%;
 
-    --primary: 257 73% 53%;
+    --primary: 217 91% 52%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 247 100% 96%;
+    --secondary: 214 100% 96%;
     --secondary-foreground: 226 22% 17%;
 
     --muted: 225 38% 96%;
     --muted-foreground: 222 12% 43%;
 
-    --accent: 248 92% 96%;
-    --accent-foreground: 257 73% 43%;
+    --accent: 214 95% 96%;
+    --accent-foreground: 217 91% 42%;
 
     --destructive: 0 62% 51%;
     --destructive-foreground: 0 0% 100%;
 
     --border: 225 31% 88%;
     --input: 225 38% 96%;
-    --ring: 257 73% 53%;
-    --card-highlight: 247 100% 96%;
+    --ring: 217 91% 52%;
+    --card-highlight: 214 100% 96%;
     --feed-blue: 217 100% 95%;
     --feed-yellow: 43 100% 93%;
-    --feed-lilac: 255 100% 96%;
+    --feed-lilac: 187 95% 95%;
     --sidebar-background: 0 0% 100%;
     --sidebar-foreground: 226 22% 17%;
-    --sidebar-primary: 257 73% 53%;
+    --sidebar-primary: 217 91% 52%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 247 100% 96%;
+    --sidebar-accent: 214 100% 96%;
     --sidebar-accent-foreground: 226 22% 17%;
     --sidebar-border: 225 31% 88%;
-    --sidebar-ring: 257 73% 53%;
+    --sidebar-ring: 217 91% 52%;
   }
 }
 

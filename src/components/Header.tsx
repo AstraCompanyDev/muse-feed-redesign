@@ -2,17 +2,16 @@ import { Search } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import logoUrl from "@/assets/upfounder-logo.jpeg";
 
 const Header = () => {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border bg-card">
       <div className="container flex h-16 items-center gap-2 sm:gap-4 px-4">
-        <Link to="/" className="flex items-center gap-2">
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary">
-            <span className="text-xl font-bold text-primary-foreground">C</span>
-          </div>
-          <span className="hidden sm:inline text-xl font-bold text-primary">CoFoundersLab</span>
+        <Link to="/" className="flex items-center shrink-0">
+          <img src={logoUrl} alt="Upfounder" className="h-9 w-auto" />
         </Link>
+
         
         <div className="flex flex-1 items-center gap-2 md:gap-4">
           <div className="relative flex-1 max-w-xl">
