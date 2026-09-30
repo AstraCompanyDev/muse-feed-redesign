@@ -189,42 +189,42 @@ const Index = () => {
           
           <main className="flex min-h-0 min-w-0 w-full flex-1 flex-col gap-3 lg:max-w-2xl">
             <div className="flex items-center justify-end gap-3">
-              <Button variant="outline" size="icon" aria-label="Refresh feed" title="Refresh feed" className="shrink-0 border-primary text-primary hover:bg-primary hover:text-primary-foreground" onClick={() => selectFeed(0)}>
+              <Button variant="outline" size="icon" aria-label="Refresh stream" title="Refresh stream" className="shrink-0 border-primary text-primary hover:bg-primary hover:text-primary-foreground" onClick={() => selectStream(0)}>
                 <RefreshCw className="h-4 w-4" />
               </Button>
             </div>
 
-            <div className="flex shrink-0 items-center gap-2 border-b border-border" aria-label="Feeds">
-              <div className="flex min-w-0 flex-1 overflow-x-auto" role="tablist" aria-label="Feeds">
-                {feeds.map((feed, index) => (
+            <div className="flex shrink-0 items-center gap-2 border-b border-border" aria-label="Streams">
+              <div className="flex min-w-0 flex-1 overflow-x-auto" role="tablist" aria-label="Streams">
+                {streams.map((stream, index) => (
                   <Button
-                    key={feed.name}
-                    id={`feed-tab-${index}`}
+                    key={stream.name}
+                    id={`stream-tab-${index}`}
                     role="tab"
-                    aria-selected={activeFeed === index}
-                    aria-controls="feed-panel"
+                    aria-selected={activeStream === index}
+                    aria-controls="stream-panel"
                     variant="ghost"
-                    onClick={() => selectFeed(index)}
-                    className={`h-12 shrink-0 rounded-none border-b-2 px-4 text-sm font-medium transition-colors ${activeFeed === index ? "border-primary text-primary" : "border-transparent text-muted-foreground hover:text-foreground"}`}
+                    onClick={() => selectStream(index)}
+                    className={`h-12 shrink-0 rounded-none border-b-2 px-4 text-sm font-medium transition-colors ${activeStream === index ? "border-primary text-primary" : "border-transparent text-muted-foreground hover:text-foreground"}`}
                   >
-                    {feed.name}
+                    {stream.name}
                   </Button>
                 ))}
               </div>
               <div className="flex shrink-0 gap-1 pb-1">
-                <Button variant="ghost" size="icon" aria-label="Previous feed" title="Previous feed" disabled={activeFeed === 0} onClick={() => selectFeed(activeFeed - 1)}>
+                <Button variant="ghost" size="icon" aria-label="Previous stream" title="Previous stream" disabled={activeStream === 0} onClick={() => selectStream(activeStream - 1)}>
                   <ChevronLeft className="h-4 w-4" />
                 </Button>
-                <Button variant="ghost" size="icon" aria-label="Next feed" title="Next feed" disabled={activeFeed === feeds.length - 1} onClick={() => selectFeed(activeFeed + 1)}>
+                <Button variant="ghost" size="icon" aria-label="Next stream" title="Next stream" disabled={activeStream === streams.length - 1} onClick={() => selectStream(activeStream + 1)}>
                   <ChevronRight className="h-4 w-4" />
                 </Button>
               </div>
             </div>
 
             <div
-              id="feed-panel"
+              id="stream-panel"
               role="tabpanel"
-              aria-labelledby={`feed-tab-${activeFeed}`}
+              aria-labelledby={`stream-tab-${activeStream}`}
               className="min-h-0 flex-1 space-y-4 overflow-y-auto overscroll-contain touch-pan-y pr-1 pb-5"
               onTouchStart={(event) => {
                 const touch = event.touches[0];
@@ -236,12 +236,12 @@ const Index = () => {
                 const dx = touch.clientX - touchStart.current.x;
                 const dy = touch.clientY - touchStart.current.y;
                 if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.5) {
-                  selectFeed(activeFeed + (dx < 0 ? 1 : -1));
+                  selectStream(activeStream + (dx < 0 ? 1 : -1));
                 }
                 touchStart.current = null;
               }}
             >
-              {feeds[activeFeed].posts.map((post, index) => (
+              {streams[activeStream].posts.map((post, index) => (
                 <FeedPost key={post.author.name} tone={index % 3 === 0 ? "blue" : index % 3 === 1 ? "yellow" : "lilac"} {...post} />
               ))}
             </div>
