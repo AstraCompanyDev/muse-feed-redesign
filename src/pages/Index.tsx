@@ -178,19 +178,19 @@ const Index = () => {
   };
 
   return (
-    <div className="h-dvh overflow-hidden bg-background">
+    <div className="h-dvh overflow-hidden bg-background bg-gradient-page">
       <Header />
       
-      <div className="container mx-auto h-[calc(100dvh-4rem)] px-4 pt-4 pb-0 sm:pt-6">
+      <div className="container mx-auto h-[calc(100dvh-4rem)] px-4 pb-0">
         <div className="flex h-full flex-col justify-center gap-6 lg:flex-row">
-          <div className="hidden lg:block">
+          <div className="hidden h-full lg:block">
             <ProfileSidebar />
           </div>
           
-          <main className="flex min-h-0 min-w-0 w-full flex-1 flex-col gap-3 lg:max-w-2xl">
+          <main className="flex min-h-0 min-w-0 w-full flex-1 flex-col gap-3 lg:max-w-2xl pt-4 sm:pt-6">
 
-            <div className="flex shrink-0 items-center gap-2 border-b border-border" aria-label="Streams">
-              <div className="flex min-w-0 flex-1 overflow-x-auto" role="tablist" aria-label="Streams">
+            <div className="flex shrink-0 items-center gap-2" aria-label="Streams">
+              <div className="flex min-w-0 flex-1 gap-1 overflow-x-auto" role="tablist" aria-label="Streams">
                 {streams.map((stream, index) => (
                   <Button
                     key={stream.name}
@@ -200,7 +200,7 @@ const Index = () => {
                     aria-controls="stream-panel"
                     variant="ghost"
                     onClick={() => selectStream(index)}
-                    className={`h-12 shrink-0 rounded-none border-b-2 px-4 text-sm font-medium transition-colors ${activeStream === index ? "border-primary text-primary" : "border-transparent text-muted-foreground hover:text-foreground"}`}
+                    className={`h-10 shrink-0 rounded-full border px-4 text-sm font-semibold transition-colors ${activeStream === index ? "border-primary/70 bg-accent text-foreground" : "border-transparent text-primary hover:bg-muted hover:text-primary"}`}
                   >
                     {stream.name}
                   </Button>
@@ -244,12 +244,12 @@ const Index = () => {
               ))}
             </div>
 
-            <div className="shrink-0 border-t border-border bg-card p-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] sm:p-3" aria-label="Create a post">
+            <div className="shrink-0 rounded-t-2xl border border-b-0 border-border bg-card p-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] sm:p-3" aria-label="Create a post">
               <PostCreator />
             </div>
           </main>
 
-          <div className="hidden xl:block">
+          <div className="hidden overflow-y-auto pt-6 xl:block">
             <PromotionalSidebar />
           </div>
         </div>
