@@ -6,6 +6,7 @@ import ProfileSidebar from "@/components/ProfileSidebar";
 import PostCreator from "@/components/PostCreator";
 import MarketTicker from "@/components/MarketTicker";
 import FeedPost from "@/components/FeedPost";
+import TopStories from "@/components/TopStories";
 import PromotionalSidebar from "@/components/PromotionalSidebar";
 import founderStory01 from "@/assets/founder-story-01.jpg";
 import founderStory02 from "@/assets/founder-story-02.jpg";
@@ -464,6 +465,7 @@ const Index = () => {
               }}
             >
               {activeStream === 3 && <MarketTicker />}
+              {activeStream === 0 && <TopStories />}
               {streams[activeStream].posts.map((post, index) => (
                 <FeedPost key={post.title} tone={index % 3 === 0 ? "blue" : index % 3 === 1 ? "yellow" : "lilac"} {...post} />
               ))}
