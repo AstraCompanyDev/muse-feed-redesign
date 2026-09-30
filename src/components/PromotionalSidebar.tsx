@@ -10,7 +10,7 @@ const PromotionalSidebar = () => {
       <Card className="border-border bg-secondary overflow-hidden">
         <CardContent className="p-6">
           <div className="flex items-center mb-3">
-            <img src={logo.url} alt="Upfounder" className="h-8 w-auto" />
+            <img src={logoUrl} alt="Upfounder" className="h-8 w-auto" />
           </div>
           <h3 className="text-2xl font-bold text-foreground mb-2">
             Welcome
