@@ -56,9 +56,7 @@ To all founders grinding: keep going!`,
     },
     title: "Featured Advisors This Week",
     timestamp: "Today, 08:45 AM",
-    content: `Meet this week's featured advisors — hand-picked from the community for their track record with early-stage founders.
-
-Swipe through the cards below and connect with anyone who fits your gap. New advisors are featured every Monday.`,
+    content: "",
     advisors: [
       {
         name: "Elena Vasquez",
