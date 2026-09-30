@@ -148,7 +148,7 @@ const FeedPost = ({ author, title, timestamp, content, image, imageRows, poll, l
         <div className="space-y-4">
           {stock ? (
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:items-center">
-              <div className="w-full rounded-xl border border-border bg-background p-4">
+              <div className="aspect-square w-full rounded-xl border border-border bg-background p-4 flex flex-col justify-center">
                 <div className="flex items-center justify-between">
                   <span className="text-base font-bold text-foreground">{stock.symbol}</span>
                   <span className={`flex items-center gap-1 text-sm font-semibold tabular-nums ${stock.change >= 0 ? "text-emerald-500" : "text-destructive"}`}>
