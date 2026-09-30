@@ -91,16 +91,16 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="h-dvh overflow-hidden bg-background">
       <Header />
       
-      <div className="container mx-auto px-4 py-6">
-        <div className="flex flex-col lg:flex-row gap-6 justify-center">
+      <div className="container mx-auto h-[calc(100dvh-4rem)] px-4 pt-4 pb-0 sm:pt-6">
+        <div className="flex h-full flex-col justify-center gap-6 lg:flex-row">
           <div className="hidden lg:block">
             <ProfileSidebar />
           </div>
           
-          <main className="flex-1 min-w-0 w-full lg:max-w-2xl space-y-4">
+          <main className="flex min-h-0 min-w-0 w-full flex-1 flex-col gap-3 lg:max-w-2xl">
             <div className="flex items-center justify-between gap-3">
               <div className="min-w-0">
                 <h1 className="text-xl font-semibold text-foreground">Your feed</h1>
@@ -111,7 +111,7 @@ const Index = () => {
               </Button>
             </div>
 
-            <div className="flex items-center gap-2 border-b border-border" aria-label="Feeds">
+            <div className="flex shrink-0 items-center gap-2 border-b border-border" aria-label="Feeds">
               <div className="flex min-w-0 flex-1 overflow-x-auto" role="tablist" aria-label="Feeds">
                 {feeds.map((feed, index) => (
                   <Button
@@ -142,7 +142,7 @@ const Index = () => {
               id="feed-panel"
               role="tabpanel"
               aria-labelledby={`feed-tab-${activeFeed}`}
-              className="space-y-4 touch-pan-y"
+              className="min-h-0 flex-1 space-y-4 overflow-y-auto overscroll-contain touch-pan-y pr-1 pb-5"
               onTouchStart={(event) => {
                 const touch = event.touches[0];
                 touchStart.current = { x: touch.clientX, y: touch.clientY };
@@ -158,12 +158,12 @@ const Index = () => {
                 touchStart.current = null;
               }}
             >
-              {feeds[activeFeed].posts.map((post) => (
-                <FeedPost key={post.author.name} {...post} />
+              {feeds[activeFeed].posts.map((post, index) => (
+                <FeedPost key={post.author.name} tone={index % 3 === 0 ? "blue" : index % 3 === 1 ? "yellow" : "lilac"} {...post} />
               ))}
             </div>
 
-            <div className="pt-4" aria-label="Create a post">
+            <div className="shrink-0 border-t border-border bg-card p-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] sm:p-3" aria-label="Create a post">
               <PostCreator />
             </div>
           </main>

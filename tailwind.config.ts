@@ -48,6 +48,11 @@ export default {
           foreground: "hsl(var(--card-foreground))",
           highlight: "hsl(var(--card-highlight))",
         },
+        feed: {
+          blue: "hsl(var(--feed-blue))",
+          yellow: "hsl(var(--feed-yellow))",
+          lilac: "hsl(var(--feed-lilac))",
+        },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
