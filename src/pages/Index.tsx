@@ -253,6 +253,7 @@ const Index = () => {
           <div className="hidden overflow-y-auto pt-6 xl:block">
             <PromotionalSidebar />
           </div>
+          </div>
         </div>
       </div>
     </div>
