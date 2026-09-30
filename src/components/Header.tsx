@@ -13,13 +13,13 @@ const Header = () => {
         </Link>
 
         
-        <div className="flex flex-1 items-center gap-2 md:gap-4">
-          <div className="relative flex-1 max-w-xl">
-            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+        <div className="flex flex-1 items-center justify-center gap-2 md:gap-4">
+          <div className="relative w-full max-w-sm">
+            <Search className="absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
             <Input
               type="search"
               placeholder="Search..."
-              className="w-full bg-input pl-9 border-border focus-visible:ring-primary"
+              className="h-8 w-full bg-input pl-8 text-sm border-border focus-visible:ring-primary"
             />
           </div>
         </div>
