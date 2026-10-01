@@ -435,7 +435,7 @@ const Index = () => {
           <div className="flex h-full gap-4">
           <main className="flex min-h-0 min-w-0 w-full flex-1 flex-col gap-3 pt-4 sm:pt-6">
 
-            <div className="flex shrink-0 items-center gap-2" aria-label="Streams">
+            <div className="flex shrink-0 items-center gap-2 rounded-2xl border border-border/60 bg-muted/80 p-1.5" aria-label="Streams">
               <div className="flex min-w-0 flex-1 gap-1 overflow-x-auto" role="tablist" aria-label="Streams">
                 {streams.map((stream, index) => (
                   <Button
@@ -446,20 +446,21 @@ const Index = () => {
                     aria-controls="stream-panel"
                     variant="ghost"
                     onClick={() => selectStream(index)}
-                    className={`h-10 shrink-0 rounded-full border px-4 text-sm font-semibold transition-colors ${activeStream === index ? "border-primary/70 bg-accent text-foreground" : "border-transparent text-primary hover:bg-muted hover:text-primary"}`}
+                    className={`h-9 shrink-0 rounded-xl px-4 text-sm transition-all duration-200 ${activeStream === index ? "bg-card font-semibold text-primary shadow-sm ring-1 ring-border" : "font-medium text-muted-foreground hover:bg-card/50 hover:text-foreground"}`}
                   >
                     {stream.name}
                   </Button>
                 ))}
               </div>
-              <div className="flex shrink-0 gap-1 pb-1">
-                <Button variant="ghost" size="icon" aria-label="Previous stream" title="Previous stream" disabled={activeStream === 0} onClick={() => selectStream(activeStream - 1)}>
+              <div className="h-5 w-px shrink-0 bg-border" />
+              <div className="flex shrink-0 items-center gap-0.5">
+                <Button variant="ghost" size="icon" aria-label="Previous stream" title="Previous stream" className="h-8 w-8 rounded-lg text-muted-foreground hover:bg-card/50 hover:text-foreground" disabled={activeStream === 0} onClick={() => selectStream(activeStream - 1)}>
                   <ChevronLeft className="h-4 w-4" />
                 </Button>
-                <Button variant="ghost" size="icon" aria-label="Refresh stream" title="Refresh stream" className="text-primary hover:bg-primary hover:text-primary-foreground" onClick={() => selectStream(0)}>
+                <Button variant="ghost" size="icon" aria-label="Refresh stream" title="Refresh stream" className="h-8 w-8 rounded-lg text-muted-foreground hover:bg-card/50 hover:text-foreground" onClick={() => selectStream(0)}>
                   <RefreshCw className="h-4 w-4" />
                 </Button>
-                <Button variant="ghost" size="icon" aria-label="Next stream" title="Next stream" disabled={activeStream === streams.length - 1} onClick={() => selectStream(activeStream + 1)}>
+                <Button variant="ghost" size="icon" aria-label="Next stream" title="Next stream" className="h-8 w-8 rounded-lg text-muted-foreground hover:bg-card/50 hover:text-foreground" disabled={activeStream === streams.length - 1} onClick={() => selectStream(activeStream + 1)}>
                   <ChevronRight className="h-4 w-4" />
                 </Button>
               </div>
