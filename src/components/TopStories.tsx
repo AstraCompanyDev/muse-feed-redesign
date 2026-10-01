@@ -7,6 +7,9 @@ import storyTile01 from "@/assets/story-tile-01.jpg";
 import storyTile02 from "@/assets/story-tile-02.jpg";
 import storyTile03 from "@/assets/story-tile-03.jpg";
 import storyTile04 from "@/assets/story-tile-04.jpg";
+import newsStory01 from "@/assets/news-story-01.jpg";
+import newsStory02 from "@/assets/news-story-02.jpg";
+import newsStory03 from "@/assets/news-story-03.jpg";
 
 const heroStories = [
   {
@@ -29,6 +32,30 @@ const heroStories = [
     title: "Inside the New Cohort: 10 Teams, 12 Weeks, One Demo Day",
     source: "Upfounder News",
     time: "6h ago",
+  },
+];
+
+const newsHeroStories = [
+  {
+    image: newsStory01,
+    category: "Markets",
+    title: "Startups Watch Rate Decision: What Cheaper Money Means for Founders",
+    source: "Upfounder News",
+    time: "1h ago",
+  },
+  {
+    image: newsStory02,
+    category: "Funding",
+    title: "Seed Rounds Up 18% as Investors Return to Early-Stage Deals",
+    source: "Upfounder News",
+    time: "3h ago",
+  },
+  {
+    image: newsStory03,
+    category: "Policy",
+    title: "Global Startup Visas Expand: Six Countries Open New Founder Routes",
+    source: "Upfounder News",
+    time: "5h ago",
   },
 ];
 
@@ -59,25 +86,30 @@ const latestStories = [
   },
 ];
 
-const TopStories = () => {
+interface TopStoriesProps {
+  variant?: "main" | "news";
+}
+
+const TopStories = ({ variant = "main" }: TopStoriesProps) => {
+  const stories = variant === "news" ? newsHeroStories : heroStories;
   const [current, setCurrent] = useState(0);
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrent((value) => (value + 1) % heroStories.length);
+      setCurrent((value) => (value + 1) % stories.length);
     }, 6000);
     return () => clearInterval(timer);
-  }, []);
+  }, [stories.length]);
 
-  const previous = () => setCurrent((value) => (value - 1 + heroStories.length) % heroStories.length);
-  const next = () => setCurrent((value) => (value + 1) % heroStories.length);
-  const story = heroStories[current];
+  const previous = () => setCurrent((value) => (value - 1 + stories.length) % stories.length);
+  const next = () => setCurrent((value) => (value + 1) % stories.length);
+  const story = stories[current];
 
   return (
-    <section aria-label="Top stories" className="space-y-3">
+    <section aria-label={variant === "news" ? "Top news stories" : "Top stories"} className="space-y-3">
       {/* Hero carousel — one image at a time */}
       <div className="group relative h-64 w-full overflow-hidden rounded-2xl border border-border bg-card sm:h-80" aria-roledescription="carousel" aria-label="Top stories highlights">
-        {heroStories.map((item, index) => (
+        {stories.map((item, index) => (
           <div
             key={item.title}
             className={`absolute inset-0 transition-opacity duration-700 ${index === current ? "opacity-100" : "pointer-events-none opacity-0"}`}
@@ -121,7 +153,7 @@ const TopStories = () => {
         </button>
 
         <div className="absolute right-4 top-4 flex gap-1.5" role="tablist" aria-label="Story position">
-          {heroStories.map((item, index) => (
+          {stories.map((item, index) => (
             <button
               key={item.title}
               type="button"
@@ -135,22 +167,24 @@ const TopStories = () => {
         </div>
       </div>
 
-      {/* Latest stories — four tiles */}
-      <div className="grid grid-cols-2 gap-3 lg:grid-cols-4" aria-label="Latest stories">
-        {latestStories.map((item) => (
-          <article key={item.title} className="overflow-hidden rounded-2xl border border-border bg-card transition-colors hover:border-primary/40">
-            <img src={item.image} alt="" className="aspect-[16/9] w-full object-cover" width={816} height={816} loading="lazy" />
-            <div className="p-3">
-              <span className="text-[11px] font-semibold uppercase tracking-wide text-primary">{item.category}</span>
-              <h3 className="mt-1 line-clamp-2 text-sm font-semibold leading-snug">{item.title}</h3>
-              <p className="mt-2 flex items-center gap-1 text-xs text-muted-foreground">
-                <Clock className="h-3 w-3" />
-                {item.time}
-              </p>
-            </div>
-          </article>
-        ))}
-      </div>
+      {/* Latest stories — four tiles (Main Stream only) */}
+      {variant === "main" && (
+        <div className="grid grid-cols-2 gap-3 lg:grid-cols-4" aria-label="Latest stories">
+          {latestStories.map((item) => (
+            <article key={item.title} className="overflow-hidden rounded-2xl border border-border bg-card transition-colors hover:border-primary/40">
+              <img src={item.image} alt="" className="aspect-[16/9] w-full object-cover" width={816} height={816} loading="lazy" />
+              <div className="p-3">
+                <span className="text-[11px] font-semibold uppercase tracking-wide text-primary">{item.category}</span>
+                <h3 className="mt-1 line-clamp-2 text-sm font-semibold leading-snug">{item.title}</h3>
+                <p className="mt-2 flex items-center gap-1 text-xs text-muted-foreground">
+                  <Clock className="h-3 w-3" />
+                  {item.time}
+                </p>
+              </div>
+            </article>
+          ))}
+        </div>
+      )}
     </section>
   );
 };
