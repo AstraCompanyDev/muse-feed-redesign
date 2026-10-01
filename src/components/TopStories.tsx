@@ -7,6 +7,9 @@ import storyTile01 from "@/assets/story-tile-01.jpg";
 import storyTile02 from "@/assets/story-tile-02.jpg";
 import storyTile03 from "@/assets/story-tile-03.jpg";
 import storyTile04 from "@/assets/story-tile-04.jpg";
+import newsStory01 from "@/assets/news-story-01.jpg";
+import newsStory02 from "@/assets/news-story-02.jpg";
+import newsStory03 from "@/assets/news-story-03.jpg";
 
 const heroStories = [
   {
@@ -29,6 +32,30 @@ const heroStories = [
     title: "Inside the New Cohort: 10 Teams, 12 Weeks, One Demo Day",
     source: "Upfounder News",
     time: "6h ago",
+  },
+];
+
+const newsHeroStories = [
+  {
+    image: newsStory01,
+    category: "Markets",
+    title: "Startups Watch Rate Decision: What Cheaper Money Means for Founders",
+    source: "Upfounder News",
+    time: "1h ago",
+  },
+  {
+    image: newsStory02,
+    category: "Funding",
+    title: "Seed Rounds Up 18% as Investors Return to Early-Stage Deals",
+    source: "Upfounder News",
+    time: "3h ago",
+  },
+  {
+    image: newsStory03,
+    category: "Policy",
+    title: "Global Startup Visas Expand: Six Countries Open New Founder Routes",
+    source: "Upfounder News",
+    time: "5h ago",
   },
 ];
 
