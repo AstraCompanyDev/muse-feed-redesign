@@ -64,7 +64,7 @@ const AdvisorCarousel = ({ advisors }: { advisors: Advisor[] }) => {
           <div
             key={advisor.name}
             data-advisor-card
-            className="w-[calc((100%-0.75rem)/2)] shrink-0 snap-start rounded-xl border border-border bg-card p-4 sm:w-[calc((100%-2.25rem)/4)]"
+            className="w-[calc((100%-1.5rem)/3)] shrink-0 snap-start rounded-xl border border-border bg-card p-4"
           >
             <div className="flex flex-col items-center text-center">
               <Avatar className="h-14 w-14 shrink-0">
