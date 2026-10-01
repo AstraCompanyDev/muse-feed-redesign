@@ -86,22 +86,27 @@ const latestStories = [
   },
 ];
 
-const TopStories = () => {
+interface TopStoriesProps {
+  variant?: "main" | "news";
+}
+
+const TopStories = ({ variant = "main" }: TopStoriesProps) => {
+  const stories = variant === "news" ? newsHeroStories : heroStories;
   const [current, setCurrent] = useState(0);
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrent((value) => (value + 1) % heroStories.length);
+      setCurrent((value) => (value + 1) % stories.length);
     }, 6000);
     return () => clearInterval(timer);
-  }, []);
+  }, [stories.length]);
 
-  const previous = () => setCurrent((value) => (value - 1 + heroStories.length) % heroStories.length);
-  const next = () => setCurrent((value) => (value + 1) % heroStories.length);
-  const story = heroStories[current];
+  const previous = () => setCurrent((value) => (value - 1 + stories.length) % stories.length);
+  const next = () => setCurrent((value) => (value + 1) % stories.length);
+  const story = stories[current];
 
   return (
-    <section aria-label="Top stories" className="space-y-3">
+    <section aria-label={variant === "news" ? "Top news stories" : "Top stories"} className="space-y-3">
       {/* Hero carousel — one image at a time */}
       <div className="group relative h-64 w-full overflow-hidden rounded-2xl border border-border bg-card sm:h-80" aria-roledescription="carousel" aria-label="Top stories highlights">
         {heroStories.map((item, index) => (
