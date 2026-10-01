@@ -440,7 +440,7 @@ const Index = () => {
           <main className="flex min-h-0 min-w-0 w-full flex-1 flex-col gap-3 pt-4 sm:pt-6">
 
             <div className="flex shrink-0 items-center gap-3" aria-label="Streams">
-              <div className="flex min-w-0 flex-1 items-start gap-4 overflow-x-auto pb-1 sm:gap-6" role="tablist" aria-label="Streams">
+              <div className="flex min-w-0 flex-1 items-start gap-4 overflow-x-auto px-2 pb-2 pt-1.5 sm:gap-6" role="tablist" aria-label="Streams">
                 {streams.map((stream, index) => (
                   <button
                     key={stream.name}
