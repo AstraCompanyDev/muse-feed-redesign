@@ -109,7 +109,7 @@ const TopStories = ({ variant = "main" }: TopStoriesProps) => {
     <section aria-label={variant === "news" ? "Top news stories" : "Top stories"} className="space-y-3">
       {/* Hero carousel — one image at a time */}
       <div className="group relative h-64 w-full overflow-hidden rounded-2xl border border-border bg-card sm:h-80" aria-roledescription="carousel" aria-label="Top stories highlights">
-        {heroStories.map((item, index) => (
+        {stories.map((item, index) => (
           <div
             key={item.title}
             className={`absolute inset-0 transition-opacity duration-700 ${index === current ? "opacity-100" : "pointer-events-none opacity-0"}`}
@@ -153,7 +153,7 @@ const TopStories = ({ variant = "main" }: TopStoriesProps) => {
         </button>
 
         <div className="absolute right-4 top-4 flex gap-1.5" role="tablist" aria-label="Story position">
-          {heroStories.map((item, index) => (
+          {stories.map((item, index) => (
             <button
               key={item.title}
               type="button"
@@ -167,22 +167,24 @@ const TopStories = ({ variant = "main" }: TopStoriesProps) => {
         </div>
       </div>
 
-      {/* Latest stories — four tiles */}
-      <div className="grid grid-cols-2 gap-3 lg:grid-cols-4" aria-label="Latest stories">
-        {latestStories.map((item) => (
-          <article key={item.title} className="overflow-hidden rounded-2xl border border-border bg-card transition-colors hover:border-primary/40">
-            <img src={item.image} alt="" className="aspect-[16/9] w-full object-cover" width={816} height={816} loading="lazy" />
-            <div className="p-3">
-              <span className="text-[11px] font-semibold uppercase tracking-wide text-primary">{item.category}</span>
-              <h3 className="mt-1 line-clamp-2 text-sm font-semibold leading-snug">{item.title}</h3>
-              <p className="mt-2 flex items-center gap-1 text-xs text-muted-foreground">
-                <Clock className="h-3 w-3" />
-                {item.time}
-              </p>
-            </div>
-          </article>
-        ))}
-      </div>
+      {/* Latest stories — four tiles (Main Stream only) */}
+      {variant === "main" && (
+        <div className="grid grid-cols-2 gap-3 lg:grid-cols-4" aria-label="Latest stories">
+          {latestStories.map((item) => (
+            <article key={item.title} className="overflow-hidden rounded-2xl border border-border bg-card transition-colors hover:border-primary/40">
+              <img src={item.image} alt="" className="aspect-[16/9] w-full object-cover" width={816} height={816} loading="lazy" />
+              <div className="p-3">
+                <span className="text-[11px] font-semibold uppercase tracking-wide text-primary">{item.category}</span>
+                <h3 className="mt-1 line-clamp-2 text-sm font-semibold leading-snug">{item.title}</h3>
+                <p className="mt-2 flex items-center gap-1 text-xs text-muted-foreground">
+                  <Clock className="h-3 w-3" />
+                  {item.time}
+                </p>
+              </div>
+            </article>
+          ))}
+        </div>
+      )}
     </section>
   );
 };

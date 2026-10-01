@@ -487,6 +487,7 @@ const Index = () => {
             >
               {activeStream === 3 && <MarketTicker />}
               {activeStream === 0 && <TopStories />}
+              {activeStream === 1 && <TopStories variant="news" />}
               {streams[activeStream].posts.map((post, index) => (
                 <FeedPost key={post.title} tone={index % 3 === 0 ? "blue" : index % 3 === 1 ? "yellow" : "lilac"} {...post} />
               ))}
