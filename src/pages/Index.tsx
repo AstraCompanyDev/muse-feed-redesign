@@ -426,7 +426,7 @@ const Index = () => {
     <div className="h-dvh overflow-hidden bg-background">
       <Header />
       
-      <div className="flex h-[calc(100dvh-4rem)] w-full px-4 sm:px-[10%]">
+      <div className="flex h-[calc(100dvh-4rem)] w-full px-4 sm:px-[4%]">
         <div className="hidden h-full shrink-0 lg:block">
           <ProfileSidebar collapsed={sidebarCollapsed} onToggle={() => setSidebarCollapsed((value) => !value)} />
         </div>
