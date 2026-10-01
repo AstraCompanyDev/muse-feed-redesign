@@ -140,7 +140,7 @@ const FeedPost = ({ author, title, timestamp, content, image, imageRows, poll, l
   return (
     <>
     <Card className={`border-border shadow-none transition-colors hover:border-primary/40 ${tone === "blue" ? "bg-feed-blue" : tone === "yellow" ? "bg-feed-yellow" : "bg-feed-lilac"}`}>
-      <CardContent className="p-4 sm:p-6">
+      <CardContent className="p-5 sm:p-8">
         <div className="flex items-start justify-between mb-4">
           <div className="flex gap-2 sm:gap-3 flex-1 min-w-0">
             <Avatar className="h-10 w-10 sm:h-12 sm:w-12 shrink-0">
