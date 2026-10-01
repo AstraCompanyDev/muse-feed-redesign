@@ -15,6 +15,10 @@ import pollA from "@/assets/poll-logo-a.jpg";
 import pollB from "@/assets/poll-logo-b.jpg";
 import pollC from "@/assets/poll-logo-c.jpg";
 import pollD from "@/assets/poll-logo-d.jpg";
+import streamMain from "@/assets/stream-main.jpg";
+import streamNews from "@/assets/stream-news.jpg";
+import streamLearning from "@/assets/stream-learning.jpg";
+import streamMarket from "@/assets/stream-market.jpg";
 
 const mainStreamPosts = [
   {
@@ -407,10 +411,10 @@ If you're raising in the next 6 months, the market backdrop matters as much as y
 ];
 
 const streams = [
-  { name: "Main Stream", description: "Everything from your community", posts: mainStreamPosts },
-  { name: "News Stream", description: "Headlines and announcements", posts: newsStreamPosts },
-  { name: "Learning Stream", description: "Lessons, workshops and guides", posts: learningStreamPosts },
-  { name: "Market Stream", description: "Stocks, prices and market moves", posts: marketStreamPosts },
+  { name: "Main Stream", shortName: "Main", image: streamMain, description: "Everything from your community", posts: mainStreamPosts },
+  { name: "News Stream", shortName: "News", image: streamNews, description: "Headlines and announcements", posts: newsStreamPosts },
+  { name: "Learning Stream", shortName: "Learning", image: streamLearning, description: "Lessons, workshops and guides", posts: learningStreamPosts },
+  { name: "Market Stream", shortName: "Market", image: streamMarket, description: "Stocks, prices and market moves", posts: marketStreamPosts },
 ];
 
 const Index = () => {
@@ -435,25 +439,51 @@ const Index = () => {
           <div className="flex h-full gap-4">
           <main className="flex min-h-0 min-w-0 w-full flex-1 flex-col gap-3 pt-4 sm:pt-6">
 
-            <div className="flex shrink-0 items-center gap-2 rounded-2xl border border-border/60 bg-muted/80 p-1.5" aria-label="Streams">
-              <div className="flex min-w-0 flex-1 gap-1 overflow-x-auto" role="tablist" aria-label="Streams">
+            <div className="flex shrink-0 items-center gap-3" aria-label="Streams">
+              <div className="flex min-w-0 flex-1 items-start gap-4 overflow-x-auto pb-1 sm:gap-6" role="tablist" aria-label="Streams">
                 {streams.map((stream, index) => (
-                  <Button
+                  <button
                     key={stream.name}
                     id={`stream-tab-${index}`}
                     role="tab"
                     aria-selected={activeStream === index}
                     aria-controls="stream-panel"
-                    variant="ghost"
+                    title={stream.name}
                     onClick={() => selectStream(index)}
-                    className={`h-9 shrink-0 rounded-xl px-4 text-sm transition-all duration-200 ${activeStream === index ? "bg-card font-semibold text-primary shadow-sm ring-1 ring-border" : "font-medium text-muted-foreground hover:bg-card/50 hover:text-foreground"}`}
+                    className="group flex shrink-0 flex-col items-center gap-1.5 rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                   >
-                    {stream.name}
-                  </Button>
+                    <span
+                      className={`rounded-full p-[3px] transition-all duration-200 ${
+                        activeStream === index
+                          ? "ring-2 ring-primary ring-offset-2 ring-offset-background"
+                          : "ring-1 ring-border group-hover:ring-primary/40"
+                      }`}
+                    >
+                      <img
+                        src={stream.image}
+                        alt=""
+                        width={56}
+                        height={56}
+                        loading="lazy"
+                        className={`h-12 w-12 rounded-full object-cover transition-opacity sm:h-14 sm:w-14 ${
+                          activeStream === index ? "" : "opacity-85 group-hover:opacity-100"
+                        }`}
+                      />
+                    </span>
+                    <span
+                      className={`text-xs sm:text-[13px] ${
+                        activeStream === index
+                          ? "font-semibold text-primary"
+                          : "font-medium text-muted-foreground group-hover:text-foreground"
+                      }`}
+                    >
+                      {stream.shortName}
+                    </span>
+                  </button>
                 ))}
               </div>
-              <div className="h-5 w-px shrink-0 bg-border" />
-              <div className="flex shrink-0 items-center gap-0.5">
+              <div className="mt-2 h-8 w-px shrink-0 bg-border" />
+              <div className="mt-1 flex shrink-0 items-center gap-0.5">
                 <Button variant="ghost" size="icon" aria-label="Previous stream" title="Previous stream" className="h-8 w-8 rounded-lg text-muted-foreground hover:bg-card/50 hover:text-foreground" disabled={activeStream === 0} onClick={() => selectStream(activeStream - 1)}>
                   <ChevronLeft className="h-4 w-4" />
                 </Button>
