@@ -411,10 +411,10 @@ If you're raising in the next 6 months, the market backdrop matters as much as y
 ];
 
 const streams = [
-  { name: "Main Stream", description: "Everything from your community", posts: mainStreamPosts },
-  { name: "News Stream", description: "Headlines and announcements", posts: newsStreamPosts },
-  { name: "Learning Stream", description: "Lessons, workshops and guides", posts: learningStreamPosts },
-  { name: "Market Stream", description: "Stocks, prices and market moves", posts: marketStreamPosts },
+  { name: "Main Stream", shortName: "Main", image: streamMain, description: "Everything from your community", posts: mainStreamPosts },
+  { name: "News Stream", shortName: "News", image: streamNews, description: "Headlines and announcements", posts: newsStreamPosts },
+  { name: "Learning Stream", shortName: "Learning", image: streamLearning, description: "Lessons, workshops and guides", posts: learningStreamPosts },
+  { name: "Market Stream", shortName: "Market", image: streamMarket, description: "Stocks, prices and market moves", posts: marketStreamPosts },
 ];
 
 const Index = () => {
