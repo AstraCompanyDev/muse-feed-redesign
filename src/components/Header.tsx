@@ -20,7 +20,7 @@ const Header = () => {
             <Input
               type="search"
               placeholder="Search..."
-              className="h-8 w-full rounded-lg bg-input pl-8 text-sm border-border focus-visible:ring-primary"
+              className="h-8 w-full rounded-lg bg-background pl-8 text-sm border-border focus-visible:ring-primary"
             />
           </div>
         </div>
