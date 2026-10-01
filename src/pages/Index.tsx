@@ -15,6 +15,10 @@ import pollA from "@/assets/poll-logo-a.jpg";
 import pollB from "@/assets/poll-logo-b.jpg";
 import pollC from "@/assets/poll-logo-c.jpg";
 import pollD from "@/assets/poll-logo-d.jpg";
+import streamMain from "@/assets/stream-main.jpg";
+import streamNews from "@/assets/stream-news.jpg";
+import streamLearning from "@/assets/stream-learning.jpg";
+import streamMarket from "@/assets/stream-market.jpg";
 
 const mainStreamPosts = [
   {
