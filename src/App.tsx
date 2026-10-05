@@ -9,6 +9,7 @@ import ProfileViews from "./pages/ProfileViews";
 import Profile from "./pages/Profile";
 import ProfileSettings from "./pages/ProfileSettings";
 import Notifications from "./pages/Notifications";
+import Upgrade from "./pages/Upgrade";
 import Messages from "./pages/Messages";
 import Inbox from "./pages/Inbox";
 import NotFound from "./pages/NotFound";
@@ -35,6 +36,7 @@ const App = () => (
           <Route path="/meetings" element={<Manage mode="meetings" />} />
           <Route path="/network" element={<Manage mode="network" />} />
           <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/upgrade" element={<Upgrade />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
