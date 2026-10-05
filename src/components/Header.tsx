@@ -27,6 +27,11 @@ const Header = () => {
 
         <div className="flex items-center gap-2">
           <ThemeToggle />
+          <Link to="/upgrade" className="hidden sm:block">
+            <Button variant="ghost" className="text-primary hover:text-primary/80">
+              Upgrade
+            </Button>
+          </Link>
           <Button variant="ghost" className="text-foreground hover:text-primary hidden sm:flex">
             Login
           </Button>
